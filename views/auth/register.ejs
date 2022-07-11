@@ -1,0 +1,70 @@
+<div class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-dark">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/auth/register" class="text-dark">Đăng ký</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-gap">
+    <div class="container">
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-account">
+                    <div class="card-header">
+                        <h1 class="card-title">
+                            Đăng ký tài khoản
+                        </h1>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" action="/auth/register" class="mb-0" aria-label="Đăng ký tài khoản">
+
+                            <div class="form-group mb-4">
+                                <input id="name" type="text" class="form-control" name="username" value="" required=""
+                                    autofocus="" placeholder="Tên đăng nhập">
+                            </div>
+                            <div class="form-group mb-4">
+                                <input type="text" class="form-control" name="name" value="" placeholder="Họ và tên"
+                                    id="fullname">
+                            </div>
+                            <div class="form-group mb-4">
+                                <input type="text" class="form-control" autocomplete="off" id="phoneOrEmail"
+                                    name="phoneOrEmail" value="" placeholder="Số đt hoặc email" required="">
+                                <input type="hidden" class="form-control" name="ref" value="">
+                            </div>
+                            <div class="form-group mb-4">
+                                <input type="password" class="form-control" autocomplete="off" name="password"
+                                    required="" placeholder="Mật khẩu" id="password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-theme waves-light waves-effect">
+                                    <i class="fas fa-sign-in-alt mr-2"></i>
+                                    Đăng ký tài khoản
+                                </button>
+                            </div>
+                        </form>
+                        <div class="card-body_action">
+                            <span class="ml-auto">Đã có tài khoản?
+                                <a href="/auth/login">Đăng nhập ngay!</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

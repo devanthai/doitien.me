@@ -1,0 +1,216 @@
+<div id="main" class="main">
+    <div class="section-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" class="text-dark">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/user/localbank" class="text-dark">Tài khoản ngân hàng</a>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-gap">
+        <div class="container">
+
+            <%if(typeof message !="undefined" && message){%>
+                <%-message%>
+                    <%}%>
+            <div class="bg-white p-md-4 p-3 rounded-sm border">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="template-1-heading">
+                            <h4 class="text-uppercase">Tài khoản ngân hàng</h4>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered template-1-table">
+                                <thead>
+                                    <tr class="bg-theme">
+                                        <th class="text-center">STT</th>
+                                        <th class="text-center">Ngân hàng</th>
+                                        <th class="text-center">Số tài khoản</th>
+                                        <th class="text-center">Chủ tài khoản</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(let i=0;i<userBanks.length;i++){%>
+
+                                        <tr>
+                                            <td class="text-center">
+                                                <%=i+1%>
+                                            </td>
+                                            <td class="text-center">
+                                                <%=userBanks[i].bankinfo%>
+                                            </td>
+                                            <td class="text-center">
+                                                <%=userBanks[i].stk%>
+                                            </td>
+                                            <td class="text-center">
+                                                <%=userBanks[i].name%>
+                                            </td>
+                                          
+                                            <td class="text-center">
+                                                <span class="label label-success">Đã duyệt</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <form method="POST"
+                                                    action="/user/localbank/del/<%=userBanks[i]._id%>"
+                                                    accept-charset="UTF-8"
+                                                    onsubmit='return confirm("Bạn có chắc chắn thực hiện hành động này?");'>
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="submit" class="btn btn-danger btn-xs"
+                                                        value="delete">Xóa</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 mt-3">
+                        <div class="template-1-heading">
+                            <h4 class="text-uppercase">Thêm ngân hàng</h4>
+                        </div>
+                        <form method="POST" action="/user/localbank" accept-charset="UTF-8">
+                            <div class="card-body">
+
+                                <div class="form-group">
+
+                                    <select name="code" class="form-control" style="padding: 0px">
+                                        <option>Chọn ngân hàng</option>
+                                        <option value="TheSieuRe.com">TheSieuRe.com</option>
+                                        <option value="MoMo">Ví MoMo</option>
+                                        <option value="Techcombank">Techcombank - Ngân hàng Kỹ Thương Việt
+                                            Nam</option>
+
+                                        <option value="BIDV">BIDV - Ngân hàng Đầu tư và Phát triển Việt Nam
+                                        </option>
+
+                                        <option value="Vietinbank">VietinBank - Ngân hàng TMCP Công thương
+                                            Việt Nam</option>
+
+                                        <option value="Agribank">Agribank (hay lỗi) - Ngân hàng Nông nghiệp
+                                            và Phát triển Nông thôn Việt Nam</option>
+
+
+
+                                        <option value="Vietcombank">Vietcombank - Ngân hàng TMCP Ngoại
+                                            thương Việt Nam</option>
+
+                                        <option value="MB Bank">MB Bank - Ngân hàng TMCP quân đội</option>
+
+                                        <option value="Sacombank">Sacombank - Ngân hàng TMCP Sài Gòn Thương
+                                            Tín</option>
+
+                                        <option value="VPBank">VPBank - Ngân hàng TMCP Việt Nam Thịnh Vượng
+                                        </option>
+
+                                        <option value="ABBank">ABBank - Ngân hàng TMCP An Bình</option>
+
+                                        <option value="ACB Bank">ACB Bank - Ngân hàng TMCP Á Châu</option>
+
+                                        <option value="BAC A BANK">BAC A Bank - Ngân hàng TMCP Bắc Á
+                                        </option>
+
+                                        <option value="BaoViet Bank">BaoViet Bank - Ngân Hàng TMCP Bảo Việt
+                                        </option>
+
+                                        <option value="DONG A Bank">DONGABank - Ngân hàng TMCP Đông Á
+                                        </option>
+
+                                        <option value="EximBank">EximBank - Ngân hàng TMCP Xuất Nhập Khẩu
+                                            Việt Nam</option>
+
+                                        <option value="HDBank">HDBank - Ngân hàng TMCP Phát triển Nhà Thành
+                                            phố Hồ Chí Minh</option>
+
+                                        <option value="MaritimeBank">MSB Bank (MaritimeBank) - Ngân hàng
+                                            TMCP Hàng hải Việt Nam</option>
+
+                                        <option value="PG Bank">PG Bank - Ngân hàng TMCP Xăng dầu Petrolimex
+                                        </option>
+
+                                        <option value="SeABank">SeABank - Ngân hàng TMCP Đông Nam Á</option>
+
+                                        <option value="SHB Bank">SHB - Ngân hàng TMCP Sài Gòn – Hà Nội
+                                        </option>
+
+                                        <option value="TPBank">TPBank - Ngân hàng TMCP Tiên Phong</option>
+
+                                        <option value="VIB Bank">VIB - Ngân hàng Quốc Tế VIB</option>
+
+                                        <option value="SAIGON Bank">SaiGonBank - Ngân hàng TMCP Sài Gòn Công
+                                            Thương</option>
+
+                                        <option value="PhuongDong OCB">OCB - Ngân hàng TMCP Phương Đông
+                                        </option>
+
+                                        <option value="OCEAN BANK">OceanBank - Ngân hàng TM TNHH Đại Dương
+                                        </option>
+
+                                        <option value="LienVietBank">LienVietBank - Ngân hàng TMCP Bưu điện
+                                            Liên Việt</option>
+
+                                        <option value="PVcomBank">PVcomBank - Ngân hàng TMCP Đại chúng Việt
+                                            Nam</option>
+
+                                        <option value="KIENLONGBANK">KIENLONGBANK- Ngân Hàng TMCP
+                                            KIENLONGBANK</option>
+
+
+                                        <option value="NAMABANK">NAMABANK-TMCP NAM A</option>
+
+                                        <option value="SCB">SCB- NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN SÀI GÒN
+                                        </option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="acc_num">Số tài khoản/SĐT Ví:</label>
+                                    <input name="acc_num" type="text" class="form-control" id="acc_num"
+                                        placeholder="Số tài khoản/SĐT Ví" value="">
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="acc_name">Chủ tài khoản:</label>
+                                    <input name="acc_name" type="text" class="form-control" id="acc_name"
+                                        placeholder="Chủ tài khoản" value="">
+                                </div>
+                              
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Thêm ngân hàng</button>
+                            </div>
+                        </form>
+
+
+
+
+        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

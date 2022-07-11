@@ -1,0 +1,79 @@
+<div class="section-gap">
+    <div class="container">
+
+
+        <div class="bg-white p-md-4 p-3 rounded-sm border">
+            <div class="col-md-12">
+                <div class="template-1-heading">
+                    <h4 class="text-uppercase">Quỹ số dư</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered template-1-table">
+                        <thead>
+                            <tr class="bg-theme">
+                                <th>Loại</th>
+                                <th>Số dư khả dụng</th>
+
+                                <th>Trạng thái</th>
+                                <th style="text-align: right">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>VND</td>
+                                <td>
+                                    <span class="text-success"><b>
+                                            <%= String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                đ
+                                        </b></span>
+                                </td>
+
+                                <td><span class="badge badge-success">Hoạt động</span> </td>
+                                <td align="right">
+                                    <a href="/wallet/history" style="padding-left: 5px"><span
+                                            class="btn btn-sm btn-info"><i class="fa fa-history"></i> Lịch
+                                            sử</span></a>
+
+                                    <a href="/deposit" style="padding-left: 5px"><span class="btn btn-sm btn-success"><i
+                                                class="fa fa-plus-circle"></i> Nạp
+                                            quỹ</span></a>
+
+                                    <a href="/withdraw" style="padding-left: 5px"><span
+                                            class="btn btn-sm btn-warning"><i class="fa fa-minus-circle"></i> Rút
+                                            quỹ</span></a>
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="deleteForm" action="" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Xóa quỹ không có số dư</h5>
+                        </div>
+                        <div id="deleteMes" class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                            <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+                        </div>
+                        <input type="hidden" name="_method" value="post">
+                        <input type="hidden" name="_token" value="2H0j9pTvVQqcjLpg18N9EgqBRooU2BjMrwSzOaGU">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

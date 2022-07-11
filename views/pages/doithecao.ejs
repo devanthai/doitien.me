@@ -1,0 +1,364 @@
+<div class="section-gap">
+    <div class="container">
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h1 class="section-heading_title text-left">
+                        Nạp tiền thẻ cào
+                    </h1>
+                    <p class="mb-0 text-danger lh-18">
+                        Nạp bằng thẻ cào sẽ có chiết khấu, Quý khách nên ưu tiên Nạp từ ATM/MOMO sẽ không bị trừ
+                        chiết khấu
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-md-7">
+
+                <form action="/doithecao" method="POST">
+
+                    <div class="form-inner form-inner_border">
+                        <div class="row align-items-center form-group mb-4">
+                            <div class="col-md-3">
+                                <label for="" class="font-weight-bold mb-0">Loại thẻ:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select class="form-control telco" name="telco[]" id="network" data-row="1">
+                                    <option value="VIETTEL" data-send-value="1">Viettel ( Chiết khấu 20% )
+                                    </option>
+                                    <option value="VINAPHONE" data-send-value="1">Thẻ Vina ( Chiết khấu 20% )
+                                    </option>
+                                    <option value="MOBIFONE" data-send-value="1">Thẻ Mobifone ( Chiết khấu 20% )
+                                    </option>
+                                    <option value="VNMOBI" data-send-value="1">Thẻ Vietnammobile ( Chiết khấu
+                                        20% )</option>
+                                    <option value="ZING" data-send-value="1">Thẻ Zing ( Chiết khấu 20% )
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center form-group mb-4">
+                            <div class="col-md-3">
+                                <label for="" class="font-weight-bold mb-0">Mã thẻ:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="code[]" id="code" data-row="1"
+                                    placeholder="Mã thẻ">
+                            </div>
+                        </div>
+                        <div class="row align-items-center form-group mb-4">
+                            <div class="col-md-3">
+                                <label for="" class="font-weight-bold mb-0">Mã seri:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="serial[]" data-row="1" id="seri"
+                                    placeholder="Mã seri">
+                            </div>
+                        </div>
+                        <div class="row align-items-center form-group mb-4">
+                            <div class="col-md-3">
+                                <label for="" class="font-weight-bold mb-0">Mệnh giá:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select class="form-control charging-amount" id="price" name="amount[]" data-row="1">
+                                    <option name="">--- Mệnh giá ---</option>
+                                    <option value="10000">10,000đ</option>
+                                    <option value="20000">20,000đ</option>
+                                    <option value="30000">30,000đ</option>
+                                    <option value="50000">50,000đ</option>
+                                    <option value="100000">100,000đ</option>
+                                    <option value="200000">200,000đ</option>
+                                    <option value="300000">300,000đ</option>
+                                    <option value="500000">500,000đ</option>
+                                    <option value="1000000">1,000,000đ</option>
+                                </select>
+                                <input type="hidden" class="defaultAmount" data-telco="VIETTEL"
+                                    data-amount="10000,20000,30000,50000,100000,200000,300000,500000,1000000">
+                                <input type="hidden" class="defaultAmount" data-telco="VINAPHONE"
+                                    data-amount="10000,20000,30000,50000,100000,200000,300000,500000,1000000">
+                                <input type="hidden" class="defaultAmount" data-telco="MOBIFONE"
+                                    data-amount="10000,20000,30000,50000,100000,200000,300000,500000,1000000">
+                                <input type="hidden" class="defaultAmount" data-telco="VNMOBI"
+                                    data-amount="10000,20000,30000,50000,100000,200000,300000,500000,1000000">
+                                <input type="hidden" class="defaultAmount" data-telco="ZING"
+                                    data-amount="10000,20000,30000,50000,100000,200000,300000,500000,1000000">
+                            </div>
+                        </div>
+                        <div class="row mt-3 mt-lg-4">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary btn-send_card waves-effect waves-light">
+                                    Gửi thẻ cào
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="section-heading">
+                    <div class="section-heading_subtitle text-left">
+                        Bảng phí đổi thẻ cào
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="section-table">
+                        <tbody>
+                            <tr>
+                                <th>Thẻ</th>
+                                <th class="text-center">Phí</th>
+                                <th class="text-center">Phạt</th>
+                            </tr>
+                            <tr>
+                                <td>Viettel ( Chiết khấu 20% )</td>
+                                <td class="text-center">20 %</td>
+                                <td class="text-center">50 %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thẻ Vina ( Chiết khấu 20% )</td>
+                                <td class="text-center">20 %</td>
+                                <td class="text-center">50 %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thẻ Mobifone ( Chiết khấu 20% )</td>
+                                <td class="text-center">20 %</td>
+                                <td class="text-center">50 %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thẻ Vietnammobile ( Chiết khấu 20% )</td>
+                                <td class="text-center">20 %</td>
+                                <td class="text-center">50 %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thẻ Zing ( Chiết khấu 20% )</td>
+                                <td class="text-center">20 %</td>
+                                <td class="text-center">50 %
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <div class="section-heading">
+                    <div class="section-heading_subtitle text-left">
+                        Lịch sử đổi thẻ
+                    </div>
+                </div>
+                <div class="table-filter form-inner mb-2">
+                    <form action="" name="formSearch" method="GET">
+                        <div class="row row-25">
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <input class="form-control" value="" name="code" placeholder="Mã nạp">
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <input class="form-control" value="" name="serial" placeholder="Serial">
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <input class="form-control" value="" name="request_id" placeholder="Request ID">
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <select name="telco" class="form-control">
+                                        <option value="" selected="selected">Chọn mạng</option>
+
+                                        <option value="VIETTEL">Viettel ( Chiết khấu 20% )</option>
+                                        <option value="VINAPHONE">Thẻ Vina ( Chiết khấu 20% )</option>
+                                        <option value="MOBIFONE">Thẻ Mobifone ( Chiết khấu 20% )</option>
+                                        <option value="VNMOBI">Thẻ Vietnammobile ( Chiết khấu 20% )</option>
+                                        <option value="ZING">Thẻ Zing ( Chiết khấu 20% )</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <select name="value" class="form-control" style="padding: 0px">
+
+                                        <option value="" selected="selected">Mệnh giá</option>
+                                        <option value="10000">10.000đ</option>
+                                        <option value="20000">20.000đ</option>
+                                        <option value="30000">30.000đ</option>
+                                        <option value="50000">50.000đ</option>
+                                        <option value="100000">100.000đ</option>
+                                        <option value="200000">200.000đ</option>
+                                        <option value="300000">300.000đ</option>
+                                        <option value="500000">500.000đ</option>
+                                        <option value="1000000">1.000.000đ</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <select name="status" class="form-control">
+                                        <option value="" selected="selected">Trạng thái</option>
+
+                                        <option value="1">Thành công</option>
+                                        <option value="2">Sai mệnh giá</option>
+                                        <option value="3">Thất bại</option>
+                                        <option value="4">Bỏ qua</option>
+                                        <option value="99">Chờ xử lý</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <input class="form-control" value="<%-new Date().toLocaleDateString()%>"
+                                        name="fromdate" type="date">
+
+                                </div>
+                            </div>
+                            <div class="col-lg col-md-3 col-6">
+                                <div class="form-group">
+                                    <input class="form-control" value="<%-new Date().toLocaleDateString()%>"
+                                        name="todate" type="date">
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-md flex-lg-grow-0">
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit" name="submit"
+                                        value="filter">
+                                        <span class="fal fa-search"> Lọc</span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="table-responsive">
+                    <table class="section-table">
+                        <tbody>
+                            <tr>
+                                <th>TT</th>
+                                <th>Mã thẻ</th>
+                                <th>Mã seri</th>
+                                <th>Nhà mạng</th>
+                                <th>Khai</th>
+                                <th>Thực</th>
+                                <th>Phạt</th>
+                                <th>Nhận</th>
+                                <th>Ngày</th>
+                            </tr>
+                            <tr>
+
+                                <% for (var i=0; i < hiscard.his.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%if(hiscard.his[i].status==99){%>
+                                        <span class="badge badge-warning template-1-badge">Thẻ chờ</span>
+                                        <% }else if(hiscard.his[i].status==1){ %>
+                                            <span class="badge badge-success template-1-badge">Thẻ đúng</span>
+                                            <% }else if(hiscard.his[i].status==2){ %>
+                                                <span class="badge badge-info template-1-badge">Sai mệnh giá</span>
+                                                <% }else if(hiscard.his[i].status==3){ %>
+                                                    <span class="badge badge-danger template-1-badge">Thẻ lỗi</span>
+                                                    <% }else{ %>
+                                                        <span class="badge badge-danger template-1-badge">
+                                                            <%-hiscard.his[i].message%>
+                                                        </span>
+                                                        <% } %>
+                                </td>
+                                <td>
+                                    <%= hiscard.his[i].code %>
+                                </td>
+                                <td>
+                                    <%= hiscard.his[i].serial %>
+                                </td>
+                                <td>
+                                    <%= hiscard.his[i].telco %>
+                                </td>
+                                <td>
+                                    <%=String(hiscard.his[i].declared_value).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                </td>
+                                <td>
+                                    <%=String(hiscard.his[i].value).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                </td>
+
+                                <td>
+                                    <%= hiscard.his[i].status==2 ? hiscard.his[i].penalty:0 %>%
+                                </td>
+                                <td>
+                                    <%=String(hiscard.his[i].amount).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                </td>
+                                <td>
+                                    <%= new Date(Date.parse(hiscard.his[i].time)).toLocaleString("pt-BR")%>
+                                </td>
+
+                            </tr>
+                            <% } %>
+
+
+
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <% if (hiscard.pages> 1) { %>
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <% if (hiscard.current==1) { %>
+                                <li class="page-item disabled"><a class="page-link">Đầu</a></li>
+                                <% } else { %>
+                                    <li><a class="page-link" href="/doithecao?page=1">Đầu</a></li>
+                                    <% } %>
+                                        <% var i=(Number(hiscard.current)> 2 ? Number(hiscard.current) - 2 : 1) %>
+                                            <% if (i !==1) { %>
+                                                <li class="disabled"><a class="page-link">...</a></li>
+                                                <% } %>
+                                                    <% for (; i <=(Number(hiscard.current) + 5) && i <=hiscard.pages;
+                                                        i++) { %>
+                                                        <% if (i==hiscard.current) { %>
+                                                            <li class="page-item active"><a class="page-link">
+                                                                    <%= i %>
+                                                                </a></li>
+                                                            <% } else { %>
+                                                                <li><a class="page-link"
+                                                                        href="/doithecao?page=<%= i %>">
+                                                                        <%= i %>
+                                                                    </a></li>
+                                                                <% } %>
+                                                                    <% if (i==Number(hiscard.current) + 5 && i <
+                                                                        hiscard.pages) { %>
+                                                                        <li class="page-item disabled"><a
+                                                                                class="page-link">...</a></li>
+                                                                        <% } %>
+                                                                            <% } %>
+                                                                                <% if (hiscard.current==hiscard.pages) {
+                                                                                    %>
+                                                                                    <li class="page-item disabled"><a
+                                                                                            class="page-link">Cuối</a>
+                                                                                    </li>
+                                                                                    <% } else { %>
+                                                                                        <li><a class="page-link"
+                                                                                                href="/doithecao?page=<%= hiscard.pages %>">Cuối</a>
+                                                                                        </li>
+                                                                                        <% } %>
+                        </ul>
+                    </nav>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,267 @@
+<%if(page.includes('home')) {%>
+
+
+<div class="td-box">
+    <style type="text/css">
+      div.td-box{
+        border-bottom: 1px solid #e5e8ed;
+      }
+      span.td-tag{
+        background-color: rgb(93, 43, 237);
+        color: #fff;
+        height: auto;
+        margin: 0 8px 0 0;
+        padding: 0 7px;
+        font-size: 12px;
+        line-height: 20px;
+        white-space: nowrap;
+        box-sizing: border-box;
+        font-variant: tabular-nums;
+        list-style: none;
+        font-feature-settings: "tnum","tnum";
+        display: inline-block;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        cursor: default;
+        opacity: 1;
+        transition: all .3s cubic-bezier(.78,.14,.15,.86);
+      }
+
+      div.td-content{
+        padding: 0.5rem 0!important;
+      }
+      a.td-link{
+        color: #5b6987;
+        font-size: 12px;
+        font-weight: 700;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+      }
+      a.td-link:hover{
+        color: #5d2bed!important;
+        text-decoration: underline;
+        transition: all .2s;
+      }
+    </style>
+    <div class="container td-content">
+        <center><span class="td-tag" style=""> Thông báo: </span> 
+        <a class="td-link">
+          Em ơi anh thương em lắm tay đâu đưa đây anh nắm</a></center><a class="td-link">
+        </a>
+    </div>
+  </div>
+  <%}%>
+
+<header id="header" class="header">
+    <div class="header-inner">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header-inner_logo">
+                        <a href="/">
+                            <img src="/storage/userfiles/files/290854527_1362073027666542_5151305803086937110_n.gif"
+                                alt="AZGD.VN" class="header-inner_logo__image" />
+                        </a>
+                        <div id="user-mobile" class="header-inner_mobile__user d-block d-lg-none">
+                            <a id="call-user_mobile" href="javascript:void(0)">
+                                <i class="fas fa-user"></i>
+                            </a>
+
+
+                            <%if(typeof user=="undefined" || user==null){%>
+                                <span class="pull-right user-header" style="padding-top: 15px">
+                                    <a href="/auth/register" class="btn btn-third">
+                                        <i class="icon ion-android-person"></i> Đăng ký
+                                    </a>
+                                    <a href="/auth/login" class="btn btn-second"
+                                        style="background: #004b7f;border-color: #004b7f;">
+                                        <i class="fa ion ion-android-unlock"></i> Đăng nhập </a>
+                                </span>
+                                <%}%>
+
+
+
+                                        <%if(typeof user=="undefined" || user==null){%>
+                                                <ul class="list-unstyled mb-0">
+                                                    <li>
+                                                        <a href="/auth/login">Đăng nhập</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/auth/register">Đăng ký tài khoản</a>
+                                                    </li>
+                                                </ul>
+
+                                                <%}else{%>
+
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li class="name">
+                                                            <%-userInfo.name%>
+                                                        </li>
+                                                        <li class="wallet">
+                                                            <a href="/wallet/history/vnd">
+                                                                <span>
+                                                                    <i class="fas fa-wallet"></i>
+                                                                </span>
+                                                                Số dư:&nbsp;
+                                                                <b>
+                                                                    <div id="arrilot-widget-container-1"
+                                                                        style="display:inline"
+                                                                        class="arrilot-widget-container">
+                                                                        <%=
+                                                                            String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                                            đ
+
+                                                                    </div>
+                                                                </b>
+                                                            </a>
+                                                        </li>
+                                                        <li><a href="/account/profile"><i class="fas fa-caret-right"></i>
+                                                            <strong>Thông tin tài khoản</strong></a></li>
+                                                    <li><a href="/wallet/list"><i class="fas fa-caret-right"></i> <strong>Quỹ số
+                                                                dư</strong></a></li>
+                                                   
+                                                 
+                                                    <li><a href="/deposit"><i class="fas fa-caret-right"></i>
+                                                            <strong>Nạp
+                                                                quỹ</strong></a></li>
+                                                    <li><a href="/withdraw"><i class="fas fa-caret-right"></i>
+                                                            <strong>Rút
+                                                                quỹ</strong></a></li>
+                                                  
+                                                    <li><a href="/account/security"><i class="fas fa-caret-right"></i>
+                                                            <strong>Bảo
+                                                                mật</strong></a></li>
+                                                    <li><a href="/user/localbank"><i class="fas fa-caret-right"></i> <strong>Tài
+                                                                khoản ngân hàng</strong></a></li>
+                                                    <li><a href="/account/change-password"><i class="fas fa-caret-right"></i>
+                                                            <strong>Đổi mật khẩu</strong></a></li>
+                                                    <li><a href="/auth/logout"><i class="fas fa-caret-right"></i> <strong>Đăng
+                                                                xuất</strong></a></li>
+
+                                                    </ul>
+                                                    <%}%>
+
+                        </div>
+                        <div class="header-inner_hamburger d-block d-lg-none">
+                            <button type="button" class="no-animation" id="call-header_mobile">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10 mobile-no_relative">
+                    <div class="d-lg-flex align-items-center justify-content-between flex-wrap">
+                        <div class="header-inner_nav">
+                            <ul class="list-unstyled mb-0" id="hasMenuTopUp">
+
+
+
+
+                             
+                                <li>
+                                    <a href="/doithecao" style="color: #004b7f">NẠP THẺ CÀO</a>
+                                </li>
+                               
+                                <li>
+                                    <a href="/deposit" style="color: #004b7f">NẠP TIỀN</a>
+                                </li>
+                                <li>
+                                    <a href="/withdraw" style="color: #004b7f">RÚT TIỀN</a>
+                                </li>
+                                <li>
+                                    <a href="/wallet/history" style="color: #004b7f">LỊCH SỬ</a>
+                                </li>
+                             
+
+
+                            </ul>
+                        </div>
+                        <div class="header-inner_user d-lg-flex align-items-center justify-content-end">
+
+                            <%if(typeof user=="undefined" || user==null){%>
+
+                                <div class="header-inner_user__item">
+                                    <a href="/auth/login" class="btn btn-login waves-effect waves-light">
+                                        <i class="fas fa-sign-in-alt mr-2"></i>
+                                        Đăng nhập
+                                    </a>
+                                </div>
+                                <div class="header-inner_user__item">
+                                    <a href="/auth/register" class="btn btn-register waves-effect waves-light">
+                                        <i class="fas fa-user-plus mr-2"></i>
+                                        Đăng ký tài khoản
+                                    </a>
+                                </div>
+                                <%}else{%>
+                                    <div class="header-inner_user__item">
+
+                                        <span class="header-inner_user__price">
+                                            <span>
+                                                <i class="fas fa-wallet"></i>
+                                            </span>
+                                            Số dư:&nbsp;
+                                            <b>
+                                                <div id="arrilot-widget-container-2" style="display:inline"
+                                                    class="arrilot-widget-container">
+                                                    <%=
+                                                        String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                        đ
+
+                                                </div>
+                                            </b>
+                                        </span>
+                                    </div>
+
+                                    <div class="header-inner_user__item ">
+                                        <button type="button" class="btn btn-login waves-effect waves-light">
+                                            <i class="fas fa-user mr-2"></i>
+                                            <%-userInfo.name%>
+                                                <i class="fal fa-angle-down btn-arrow ml-1"></i>
+                                        </button>
+                                        <ul class="list-unstyled mb-0">
+
+
+                                          
+
+                                            <li><a href="/account/profile"><i class="fas fa-caret-right"></i>
+                                                    <strong>Thông tin tài khoản</strong></a></li>
+                                            <li><a href="/wallet/list"><i class="fas fa-caret-right"></i> <strong>Quỹ số
+                                                        dư</strong></a></li>
+                                           
+                                         
+                                            <li><a href="/deposit"><i class="fas fa-caret-right"></i>
+                                                    <strong>Nạp
+                                                        quỹ</strong></a></li>
+                                            <li><a href="/withdraw"><i class="fas fa-caret-right"></i>
+                                                    <strong>Rút
+                                                        quỹ</strong></a></li>
+                                          
+                                            <li><a href="/account/security"><i class="fas fa-caret-right"></i>
+                                                    <strong>Bảo
+                                                        mật</strong></a></li>
+                                            <li><a href="/user/localbank"><i class="fas fa-caret-right"></i> <strong>Tài
+                                                        khoản ngân hàng</strong></a></li>
+                                            <li><a href="/account/change-password"><i class="fas fa-caret-right"></i>
+                                                    <strong>Đổi mật khẩu</strong></a></li>
+                                            <li><a href="/auth/logout"><i class="fas fa-caret-right"></i> <strong>Đăng
+                                                        xuất</strong></a></li>
+
+
+
+                                        </ul>
+                                    </div>
+                                    <%}%>
+                        </div>
+                        <div class="header-overlay" id="header-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

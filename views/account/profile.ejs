@@ -1,0 +1,159 @@
+<div class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-dark">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/account/profile" class="text-dark">Thông tin tài khoản</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-gap">
+    <div class="container">
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+        <div class="template-1_information">
+
+            <div class="card rounded-sm bg-white pt-3">
+                <div class="card-header bg-transparent rounded-0 border-0">
+                    <div class="template-1-heading">
+                        <h4>
+                            Thông tin tài khoản
+                        </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="information-view" id="informationView">
+                        <div class="information-list">
+                            <div class="row no-gutters pb-3 mb-3">
+                                <div class="col-5 col-md-4">
+                                    Tên đăng nhập:
+                                </div>
+                                <div class="col-7 text-right text-md-left col-md-8">
+                                    <b><%-user.Username%></b>
+                                </div>
+                            </div>
+                            <div class="row no-gutters pb-3 mb-3">
+                                <div class="col-5 col-md-4">
+                                    Họ và tên:
+                                </div>
+                                <div class="col-7 text-right text-md-left col-md-8">
+                                    <b><%-userInfo.name%></b>
+                                </div>
+                            </div>
+                            <div class="row no-gutters pb-3 mb-3">
+                                <div class="col-5 col-md-4">
+                                    Email
+                                </div>
+                                <div class="col-7 text-right text-md-left col-md-8">
+                                    <b><%-userInfo.email%></b>
+                                </div>
+                            </div>
+                            
+                            
+                           
+                            <div class="row no-gutters pb-3 mb-3">
+                                <div class="col-5 col-md-4">
+                                    Ngày đăng ký:
+                                </div>
+                                <div class="col-7 text-right text-md-left col-md-8">
+                                    <b><%= new
+                                        Date(Date.parse(userInfo.joindate)).toLocaleString("pt-BR")%></b>
+                                </div>
+                            </div>
+
+
+                            <div class="row no-gutters pb-3 mb-3">
+                                <div class="col-5 col-md-4">
+                                    Ví điện tử:
+                                </div>
+                                <div class="col-7 text-right text-md-left col-md-8">
+                                    <b><%-user.Username%></b>
+                                    (<span class="text-success"><b>
+                                        <%=
+                                            String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                            đ VND
+                                    </b></span>
+                                )
+                                </div>
+                            </div>
+                          
+
+                           
+                        </div>
+                        <div class="mt-5 pt-4 border-top text-center text-md-left">
+                            <a href="/account/profile/edit"
+                                class="btn btn-success template-1-btn btn-sm updateInformation">
+                                Sửa thông tin
+                            </a>
+                            <a href="/account/change-password"
+                                class="btn btn-secondary template-1-btn btn-sm updateInformation">Đổi mật khẩu
+                            </a>
+                           
+                        </div>
+                    </div>
+
+                </div>
+                <div class="loading-pure" style="display: none">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 rounded-sm bg-white py-4 px-3 border">
+            <div class="row">
+                <div class="col-12">
+                    <div class="template-1-heading">
+                        <h4>Lịch sử đăng nhập</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered template-1-table">
+                            <thead>
+
+                                
+                                <tr class="bg-theme">
+                                    <th>IP</th>
+                                    <th class="text-center">Ngày tạo</th>
+                                    <th>Trình duyệt</th>
+                                </tr>
+
+                                <% for (var i=0; i < loginlogs.length; i++) { %>
+                                    <tr class="irow">
+                                        <td>
+                                            <%=loginlogs[i].ip%>
+                                        </td>
+                                        <td>
+                                            <%= new
+                                                Date(Date.parse(loginlogs[i].time)).toLocaleString("pt-BR")%>
+                                        </td>
+                                        <td>
+                                            <%=loginlogs[i].userAgent%>
+                                        </td>
+
+                                    </tr>
+
+                                    <% } %>
+
+
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

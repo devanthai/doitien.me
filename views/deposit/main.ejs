@@ -1,0 +1,294 @@
+<div class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-dark">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/wallet/list" class="text-dark">Danh sách quỹ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/deposit/" class="text-dark">Nạp vào quỹ</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section-gap">
+    <div class="container">
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="section-heading">
+                                <h1 class="section-heading_title text-left">
+                                    Nạp quỹ
+                                </h1>
+                                <p class="mb-0 text-danger lh-18">
+                                    Hệ thống Nạp tiền tự động 24/7 ( Nghiêm cấm rửa tiền, khóa tài khoản vĩnh viễn )
+                                </p>
+                            </div>
+                            <form action="" method="POST">
+
+                                <div class="form-inner form-inner_border">
+                                    <div class="row align-items-center form-group mb-4 h6">
+                                        <div class="col-md-3">
+                                            <label for="" class="font-weight-bold mb-0"><i
+                                                    class="fas fa-wallet text-muted mr-1"></i> Số dư
+                                                :</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <b class="color-main">
+                                                <%=
+                                                    String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                    VND
+                                            </b>
+                                            <input name="wallet" type="hidden" value="0070592481">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center form-group">
+                                        <div class="col-md-3">
+                                            <label for="" class="font-weight-bold mb-0">Số tiền nạp:</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input name="net_amount" type="text" class="form-control" id="net_amount"
+                                                placeholder="Số tiền nạp" value="">
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center form-group mb-3">
+                                        <div class="col-md-3">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span class="small text-danger">Tối thiểu
+                                                <%=String(setting.deposit.minin).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                    VND , Tối đa <%=String(setting.deposit.maxin).replace(
+                                                        /(.)(?=(\d{3})+$)/g,'$1,')%> VND
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center form-group mb-4">
+                                        <div class="col-md-3">
+                                            <label for="" class="font-weight-bold mb-0">Cổng thanh toán:</label>
+                                        </div>
+                                        <div class="col-md-9">
+
+                                            <select name="paygate_code" class="form-control" style="padding: 0px">
+                                                <% for (var i=0; i < banks.length; i++) { %>
+                                                    <option value="<%= banks[i].gate %>">
+                                                        <%= banks[i].namebank %>
+                                                    </option>
+                                                    <%}%>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3 mt-lg-4">
+                                        <div class="col-12 text-center">
+                                            <button type="submit"
+                                                class="btn btn-primary btn-send_card waves-effect waves-light">
+                                                Nạp tiền ngay
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5 mt-5 mt-md-0">
+                            <div class="section-heading">
+                                <div class="section-heading_subtitle text-left">
+                                    Hạn mức và phí:
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="section-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bg-light">Tổng hạn mức ngày</td>
+                                            <td class="font-weight-bold bg-white">Không hạn chế</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light">Số tiền tối thiểu</td>
+                                            <td class="font-weight-bold bg-white">
+                                                <%=String(setting.deposit.minin).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                    VND
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light">Số tiền tối đa</td>
+                                            <td class="font-weight-bold bg-white">
+                                                <%=String(setting.deposit.maxin).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                    VND
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="section-heading mt-5">
+                                <div class="section-heading_subtitle text-left">
+                                    Cổng thanh toán:
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="section-table">
+                                    <tbody>
+
+
+
+
+                                        <tr>
+                                            <th>Cổng thanh toán</th>
+                                            <th class="text-center">Phí cố định</th>
+                                            <th class="text-center">Phí %</th>
+                                        </tr>
+
+
+                                        <% for (var i=0; i < banks.length; i++) { %>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <%= banks[i].namebank %>
+                                                </td>
+                                                <td class="text-center">0
+                                                    %
+                                                </td>
+                                            </tr>
+                                            <%}%>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-5">
+                            <div class="section-heading">
+                                <div class="section-heading_subtitle text-left">
+                                    Lịch sử nạp tiền
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="section-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Đơn hàng</th>
+                                            <th class="text-center">Nạp vào quỹ</th>
+                                            <th class="text-center">Số tiền</th>
+                                            <th>Cổng thanh toán</th>
+                                            <th>Ngày tạo</th>
+                                            <th class="text-center">Trạng thái</th>
+                                            <th class="text-center">Hành động</th>
+                                        </tr>
+                                        <tr>
+
+
+                                            <% for (var i=0; i < data.length; i++) { %>
+                                        <tr>
+
+
+                                            <td class="font-weight-bold">
+                                                <%= data[i].transid %><br><small class="text-muted">(<%= data[i].content
+                                                            %>)</small>
+                                            </td>
+
+
+
+                                            <td class="text-center">VND</td>
+                                            <td class="text-center">+<%=String(data[i].amount).replace(
+                                                    /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                    đ</td>
+                                            <td>
+                                                <%= data[i].gate %>
+                                            </td>
+                                            <td>
+                                                <%= new Date(Date.parse(data[i].time)).toLocaleString("pt-BR")%>
+                                            </td>
+                                            <td>
+
+                                                <%if(data[i].status==0){%>
+                                                    <span class="badge badge-warning template-1-badge">CHỜ THANH TOÁN</span>
+                                                    <%}else if(data[i].status==1){%>
+                                                        <span class="badge badge-success template-1-badge">THÀNH CÔNG</span>
+                                                        <%}else if(data[i].status==2){%>
+
+                                                            <span class="badge badge-danger template-1-badge">ĐÃ HỦY</span>
+
+                                                            <%}%>
+                                            </td>
+
+
+                                            <td class="text-center">
+                                                <a href="/deposit/checkout/<%= data[i].transid %>"
+                                                    class="btn btn-success template-1-btn btn-sm">
+                                                    Chi tiết <i class="fal fa-external-link-alt ml-1"></i>
+                                                </a>
+                                            </td>
+
+
+                                        </tr>
+                                        <% } %>
+
+                                            </tr>
+
+                                    </tbody>
+                                </table>
+                                <% if (pages> 1) { %>
+                                    <nav aria-label="...">
+                                        <ul class="pagination">
+                                            <% if (current==1) { %>
+                                                <li class="page-item disabled"><a class="page-link">Đầu</a></li>
+                                                <% } else { %>
+                                                    <li><a class="page-link" href="/deposit?page=1">Đầu</a></li>
+                                                    <% } %>
+                                                        <% var i=(Number(current)> 2 ? Number(current) - 2 : 1) %>
+                                                            <% if (i !==1) { %>
+                                                                <li class="disabled"><a class="page-link">...</a>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% for (; i <=(Number(current) + 2) && i <=pages;
+                                                                        i++) { %>
+                                                                        <% if (i==current) { %>
+                                                                            <li class="page-item active"><a
+                                                                                    class="page-link">
+                                                                                    <%= i %>
+                                                                                </a></li>
+                                                                            <% } else { %>
+                                                                                <li><a class="page-link"
+                                                                                        href="/deposit?page=<%= i %>">
+                                                                                        <%= i %>
+                                                                                    </a></li>
+                                                                                <% } %>
+                                                                                    <% if (i==Number(current) + 2 && i <
+                                                                                        pages) { %>
+                                                                                        <li class="page-item disabled">
+                                                                                            <a class="page-link">...</a>
+                                                                                        </li>
+                                                                                        <% } %>
+                                                                                            <% } %>
+                                                                                                <% if (current==pages) {
+                                                                                                    %>
+                                                                                                    <li
+                                                                                                        class="page-item disabled">
+                                                                                                        <a
+                                                                                                            class="page-link">Cuối</a>
+                                                                                                    </li>
+                                                                                                    <% } else { %>
+                                                                                                        <li><a class="page-link"
+                                                                                                                href="/deposit?page=<%= pages %>">Cuối</a>
+                                                                                                        </li>
+                                                                                                        <% } %>
+                                        </ul>
+                                    </nav>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</div>

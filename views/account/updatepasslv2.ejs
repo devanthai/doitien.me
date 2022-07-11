@@ -1,0 +1,56 @@
+<div class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-dark">Trang chủ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/account/security" class="text-dark">Cập nhật mật khẩu cấp 2</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-gap">
+    <div class="container">
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+                    <div class="bg-white p-md-4 p-3 rounded-sm border">
+                        <div class="row">
+                            <div class="col-12">
+
+                            </div>
+                            <div class="col-12">
+                                <div class="template-1-heading">
+                                    <h3 class="text-uppercase&quot;">
+                                        Cập nhật mật khẩu cấp 2
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="box-content table-responsive">
+                                    <form method="POST" action="/account/profile/updatemkc2">
+                                        
+                                        <div class="form-group">
+                                            <label>Mã xác thực</label>
+                                            <div><input type="password" class="form-control" name="passwordc2"
+                                                    placeholder="Nhập mật khẩu cấp 2"></div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <button class="btn btn-warning" style="width: 100%">Cập nhật thông
+                                                tin</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</div>

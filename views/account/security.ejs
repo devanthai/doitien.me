@@ -1,0 +1,72 @@
+
+
+
+<div id="main" class="main">
+    <div class="section-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" class="text-dark">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/account/security" class="text-dark">Bảo mật tài khoản</a>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-gap">
+        <div class="container">
+            <div class="bg-white p-md-4 p-3 rounded-sm border">
+                <div class="row">
+                    <div class="col-12">
+
+                    </div>
+                    <div class="col-12">
+                        <div class="template-1-heading">
+                            <h4>
+                                Bảo mật tài khoản
+                            </h4>
+                            <p class="mb-0 text-dark lh-18 text-danger">
+                                Lưu ý: Để bảo mật tài khoản, bạn nên bật 1 phương pháp bảo vệ bên dưới.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-condensed" style="margin-bottom: 0px">
+                            <tbody>
+                                
+                               
+                                <tr class="ads">
+                                    <td style="width: 10%;padding-right: 0px!important;"><img
+                                            src="/images/Mkc2.png"></td>
+                                    <td style="padding-left: 10px!important;width: 75%"><span
+                                            style="font-size: 16px"><strong>Bảo mật bằng mật khẩu cấp 2
+                                            </strong></span><br>
+                                        <span class="small">Bạn sẽ nhập mật khẩu cấp 2 mỗi khi có giao dịch (Mức an toàn
+                                            thấp)</span>
+                                    </td>
+                                    <td>
+                                        <label class="badge badge-secondary">
+                                            Đang tắt
+                                        </label>
+                                    </td>
+                                    <td style="width: 15%">
+                                        <a class="btn btn-outline-<%-userInfo.isActivePassLevel2?'danger':'success'%> btn-sm   " style="display: block"
+                                            href="/account/active/Mkc2"><%-userInfo.isActivePassLevel2?"Tắt":"Bật"%></a>
+                                    </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

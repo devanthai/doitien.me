@@ -1,0 +1,176 @@
+<div class="section-gap">
+    <div class="container">
+
+        <section>
+            <h4><span class="text-uppercase">Lịch sử quỹ</span></h4>
+            <div class="blockContent">
+                <div class="row table-responsive">
+                    <div class="col-md-12">
+                        <div class="table-filter mb-3">
+                            <form action="" name="formSearch" method="GET">
+                                <div class="row row-25">
+                                    <div class="col-lg col-md-3 col-6">
+                                        <div class="form-group">
+                                            <input class="form-control" value="" name="search"
+                                                placeholder="Nhập mã gd hoặc nội dung">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg col-md-3 col-6">
+                                        <div class="form-group">
+                                            <input class="form-control" value="<%-new Date().toLocaleDateString()%>" name="fromdate" type="date">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg col-md-3 col-6">
+                                        <div class="form-group">
+                                            <input class="form-control" value="<%-new Date().toLocaleDateString()%>" name="todate" type="date">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md flex-lg-grow-0">
+                                        <div class="d-flex align-items-center">
+                                            <button class="btn btn-primary waves-effect waves-light" type="submit"
+                                                name="submit" value="filter">
+                                                <span class="fal fa-search"> Lọc</span>
+                                            </button>
+                                         
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <table id="example1" class="table table-bordered table-striped dataTable"
+                            style="margin-top: 10px">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Trước GD</th>
+                                    <th>Số tiền</th>
+                                    <th>Sau GD</th>
+                                    <th>Tiền tệ</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Nội dung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <% for (var i=0; i < hisdata.his.length; i++) { %>
+                                    <tr>
+                                        <td scope="col">
+                                            <%= hisdata.his[i].transid %>
+                                        </td>
+
+                                        <td scope="col">
+                                            <%=String(Math.round(hisdata.his[i].firtBalance)).replace(
+                                                /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                        </td>
+
+
+
+
+                                        <td>
+                                            <%if(hisdata.his[i].amount<0){%>
+                                                <b> <span class="text-danger">
+                                                        <%=Math.round(hisdata.his[i].amount).toString().replace(
+                                                            /\B(?=(\d{3})+(?!\d))/g, ',' )%>đ
+                                                    </span> </b>
+                                                <%}else{%>
+                                                    <b> <span class="text-success">+
+                                                            <%=String(Math.round(hisdata.his[i].amount)).replace(
+                                                                /(.)(?=(\d{3})+$)/g,'$1,')%>đ
+                                                        </span> </b>
+                                                    <%}%>
+                                        </td>
+
+
+
+
+
+                                        <td>
+                                            <%=String(Math.round(hisdata.his[i].lastBalance)).replace(
+                                                /(.)(?=(\d{3})+$)/g,'$1,')%>đ
+                                        </td>
+
+
+
+                                        <td>
+                                            <%= hisdata.his[i].tiente %>
+                                        </td>
+
+
+                                        <td>
+                                            <%= new Date(Date.parse(hisdata.his[i].time)).toLocaleString("pt-BR")%>
+                                        </td>
+                                        <td>
+                                            <%= hisdata.his[i].content %>
+                                        </td>
+
+
+                                    </tr>
+                                    <% } %>
+
+
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                        <% if (hisdata.pages> 1) { %>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    <% if (hisdata.current==1) { %>
+                                        <li class="page-item disabled"><a class="page-link">Đầu</a></li>
+                                        <% } else { %>
+                                            <li><a class="page-link" href="/wallet/history?page=1">Đầu</a></li>
+                                            <% } %>
+                                                <% var i=(Number(hisdata.current)> 5 ? Number(hisdata.current) -
+                                                    5 : 1) %>
+                                                    <% if (i !==1) { %>
+                                                        <li class="disabled"><a class="page-link">...</a></li>
+                                                        <% } %>
+                                                            <% for (; i <=(Number(hisdata.current) + 5) && i
+                                                                <=hisdata.pages; i++) { %>
+                                                                <% if (i==hisdata.current) { %>
+                                                                    <li class="page-item active"><a class="page-link">
+                                                                            <%= i %>
+                                                                        </a></li>
+                                                                    <% } else { %>
+                                                                        <li><a class="page-link"
+                                                                                href="/wallet/history?page=<%= i %>">
+                                                                                <%= i %>
+                                                                            </a></li>
+                                                                        <% } %>
+                                                                            <% if (i==Number(hisdata.current) + 5 && i <
+                                                                                hisdata.pages) { %>
+                                                                                <li class="page-item disabled">
+                                                                                    <a class="page-link">...</a>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                                        <% if
+                                                                                            (hisdata.current==hisdata.pages)
+                                                                                            { %>
+                                                                                            <li
+                                                                                                class="page-item disabled">
+                                                                                                <a
+                                                                                                    class="page-link">Cuối</a>
+                                                                                            </li>
+                                                                                            <% } else { %>
+                                                                                                <li><a class="page-link"
+                                                                                                        href="/wallet/history?page=<%= hisdata.pages %>">Cuối</a>
+                                                                                                </li>
+                                                                                                <% } %>
+                                </ul>
+                            </nav>
+                            <% } %>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
