@@ -18,6 +18,7 @@
                             <th>Tài khoản</th>
                             <th>Số tiền</th>
                             <th>Ngân hàng nhận</th>
+                            <th>Tên</th>
                             <th>STK</th>
                             <th>Trạng thái</th>
                             <th>Thời gian</th>
@@ -41,7 +42,10 @@
                                     <%= String(Math.round(listWithdraws[i].amount)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
                                 </td>
                                 <td>
-                                    <%=listWithdraws[i].bank.bank%>
+                                    <%=listWithdraws[i].bank.bankinfo%>
+                                </td>
+                                <td>
+                                    <%=listWithdraws[i].bank.name%>
                                 </td>
                                 <td>
                                     <%=listWithdraws[i].bank.stk%>
