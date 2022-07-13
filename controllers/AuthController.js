@@ -177,6 +177,7 @@ Register = (req, res) => {
                                 }
                                 UserInfo.create(temp, (error, userInfo) => {
                                     if (userInfo) {
+                                        console.log(user._id)
                                         req.session.UserId = user._id
                                         res.redirect("/")
                                     }
