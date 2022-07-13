@@ -40,9 +40,9 @@
                                                 String(Math.round(fees[i].list[iz].value)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
                                                 đ</th>
                                         <% } %>
-                                        <th class="text-center">
-                                            Chức năng
-                                        </th>
+                                            <th class="text-center">
+                                                Chức năng
+                                            </th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -54,12 +54,12 @@
                                             <%=fees[i].list[iz].fees%>
                                         </td>
                                         <% } %>
-                                        <th class="text-center">
-                                            <button class="btn btn-xs bg-red waves-effect collapsed" type="button">
-                                                Tình đầu là tình dang dở
-                                        </button>
-                                            
-                                        </th>
+                                            <th class="text-center">
+                                                <button class="btn btn-xs bg-red waves-effect collapsed" type="button">
+                                                    Tình đầu là tình dang dở
+                                                </button>
+
+                                            </th>
                                 </tr>
                             </tbody>
                         </table>
@@ -68,42 +68,58 @@
 
 
             </div>
+            <h2 class="card-inside-title">Kê phần trăm</h2>
+            <div class="form-group">
+                <div class="form-line">
+                    <input id="percent" value="<%= setting.upFee %>" type="text" class="form-control"
+                        placeholder="Số tiền rút tối thiểu">
+                </div>
+                <button onclick="saveUpfee()" class="btn bg-cyan waves-effect m-b-15 collapsed" type="button" >
+                    Lưu lại
+                </button>
+            </div>
+
+
+
             <button class="btn bg-cyan waves-effect m-b-15 collapsed" type="button" data-toggle="collapse"
-            data-target="#thutufee" aria-expanded="false" aria-controls="thutufee">
-            Sắp thứ tự hiển thị
-        </button>
-            <a href="/getFeeCard" onclick="return confirm('Bạn có chắc muốn xóa giá cũ và cập nhật lại bảng giá mới?');" type="button" class="btn bg-red waves-effect m-b-15 collapsed">Lấy bảng phí từ
+                data-target="#thutufee" aria-expanded="false" aria-controls="thutufee">
+                Sắp thứ tự hiển thị
+            </button>
+            <a href="/getFeeCard" onclick="return confirm('Bạn có chắc muốn xóa giá cũ và cập nhật lại bảng giá mới?');"
+                type="button" class="btn bg-red waves-effect m-b-15 collapsed">Lấy bảng phí từ
                 api (Reset thứ tự)</a>
 
-                <a href="/getFeeCard?sort=false" onclick="return confirm('Bạn có chắc muốn xóa giá cũ và cập nhật lại bảng giá mới?');" type="button" class="btn bg-red waves-effect m-b-15 collapsed">Lấy bảng phí từ
-                    api không Reset thứ tự</a>
-           
-          
+            <a href="/getFeeCard?sort=false"
+                onclick="return confirm('Bạn có chắc muốn xóa giá cũ và cập nhật lại bảng giá mới?');" type="button"
+                class="btn bg-red waves-effect m-b-15 collapsed">Lấy bảng phí từ
+                api không Reset thứ tự</a>
 
 
-        <div class="collapse" id="thutufee" aria-expanded="false" style="height: 0px;">
-            <h3>Sắp xếp thứ tự hiển thị</h3>
-            <div class="clearfix m-b-20">
-                <div class="dd">
-                    <ol class="dd-list">
-                        <% for (var i=0; i < setting.sortFeeCard.length; i++) { %>
-                            <li class="dd-item" data-name="<%=setting.sortFeeCard[i]%>">
-                                <div class="dd-handle">
-                                    <%=setting.sortFeeCard[i]%>
-                                </div>
-                            </li>
-                            <% } %>
-                    </ol>
+
+
+            <div class="collapse" id="thutufee" aria-expanded="false" style="height: 0px;">
+                <h3>Sắp xếp thứ tự hiển thị</h3>
+                <div class="clearfix m-b-20">
+                    <div class="dd">
+                        <ol class="dd-list">
+                            <% for (var i=0; i < setting.sortFeeCard.length; i++) { %>
+                                <li class="dd-item" data-name="<%=setting.sortFeeCard[i]%>">
+                                    <div class="dd-handle">
+                                        <%=setting.sortFeeCard[i]%>
+                                    </div>
+                                </li>
+                                <% } %>
+                        </ol>
+                    </div>
+                </div>
+                <a onclick="saveSortFeeCard()" type="button" class="btn bg-red waves-effect m-b-15 collapsed">Lưu sắp
+                    xếp</a>
+                <div style="display: none">
+                    <b>Output JSON</b>
+                    <textarea id="listFeeSort" cols="30" rows="3" class="form-control no-resize"
+                        readonly><%-listsort%></textarea>
                 </div>
             </div>
-            <a onclick="saveSortFeeCard()" type="button" class="btn bg-red waves-effect m-b-15 collapsed">Lưu sắp
-                xếp</a>
-            <div style="display: none">
-                <b>Output JSON</b>
-                <textarea id="listFeeSort" cols="30" rows="3" class="form-control no-resize"
-                    readonly><%-listsort%></textarea>
-            </div>
-        </div>
 
 
 
@@ -271,23 +287,21 @@
     </div>
 </div> -->
 <script>
-    DeleteCardBuy = (id,doc) => {
-        doc= doc.parentElement.parentNode
-        if(!confirm("Bạn có chắc chắn muốn xóa "+doc.children[1].innerText))
-        {
+    DeleteCardBuy = (id, doc) => {
+        doc = doc.parentElement.parentNode
+        if (!confirm("Bạn có chắc chắn muốn xóa " + doc.children[1].innerText)) {
             return
         }
         $.ajax({
             url: "/setting/deleteBuyCard",
             type: "post",
             data: {
-                id:id
+                id: id
             },
             success: function (result) {
-               
+
                 alert(result.message)
-                if(result.error==0)
-                {
+                if (result.error == 0) {
                     doc.remove()
                 }
             }
@@ -296,24 +310,23 @@
 
 
     }
-    EditCardBuy = (id,doc) => {
-        doc= doc.parentElement.parentNode
+    EditCardBuy = (id, doc) => {
+        doc = doc.parentElement.parentNode
         var loai = undefined
-        try
-        {
+        try {
             loai = doc.children[4].children[0].value
         }
-        catch{}
-        
+        catch { }
+
         fee = doc.children[3].children[0].value
 
         $.ajax({
             url: "/setting/editBuyCard",
             type: "post",
             data: {
-                id:id,
+                id: id,
                 loai: loai,
-                fee:fee
+                fee: fee
             },
             success: function (result) {
                 alert(result.message)
@@ -327,6 +340,19 @@
             type: "post",
             data: {
                 listFeeSort: listFeeSort
+            },
+            success: function (result) {
+                alert(result.message)
+            }
+        });
+    }
+    saveUpfee = () => {
+        const percent = $("#percent").val()
+        $.ajax({
+            url: "/setting/saveUpfee",
+            type: "post",
+            data: {
+                upFee: percent
             },
             success: function (result) {
                 alert(result.message)

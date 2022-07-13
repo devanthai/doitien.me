@@ -1,0 +1,312 @@
+<div id="main" class="main">
+    <div class="section-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" class="text-dark">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/wallet/list" class="text-dark">Rút tiền</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/withdraw/gt1s" class="text-dark">Rút tiền ra GachThe1s.Com</a>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-gap">
+        <div class="container">
+            <%if(typeof message !="undefined" && message){%>
+                <%-message%>
+                    <%}%>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="section-heading">
+                                    <h1 class="section-heading_title text-left">
+                                        Rút tiền ra GachThe1s
+                                    </h1>
+                                </div>
+                                <form action="/withdraw/gt1s" method="POST">
+
+                                    <div class="form-inner form-inner_border">
+                                        <div class="row align-items-center form-group mb-4 h6">
+                                            <div class="col-md-3">
+                                                <label for="" class="font-weight-bold mb-0"><i
+                                                        class="fas fa-wallet text-muted mr-1"></i> Số dư quỹ:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <b class="color-main">
+                                                    <%=
+                                                        String(Math.round(userInfo.money)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                        VND
+                                                </b>
+
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center form-group">
+                                            <div class="col-md-3">
+                                                <label for="" class="font-weight-bold mb-0">Số tiền rút:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input name="amount" type="text" class="form-control" id="amount"
+                                                    placeholder="Số tiền" value="">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center form-group mb-3">
+                                            <div class="col-md-3">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <small class="text-danger">Tối thiểu <%=
+                                                        String(Math.round(setting.withdraw.min)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                        VND , Tối đa <%=
+                                                            String(Math.round(setting.withdraw.max)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                            VND</small>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row align-items-center form-group mb-3">
+                                            <div class="col-md-3">
+                                                <label for="" class="font-weight-bold mb-0">Tk nhận tiền:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input name="stk" type="text" class="form-control" id="stk"
+                                                    placeholder="Nhập tài khoản nhận tiền" value="">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row align-items-center form-group">
+                                            <div class="col-md-3">
+                                                <label for="" class="font-weight-bold mb-0">Tên GachThe1s:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input name="namestk" type="text" class="form-control" id="namestk"
+                                                    placeholder="Nhập tên của khoản nhận tiền" value="">
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center form-group mb-4">
+                                            
+                                            <%if(userInfo.isActivePassLevel2){%>
+                                                <div class="col-md-9">
+                                                    <label>Mã xác thực cấp 2</label>
+                                                    <div><input style="padding: 0px" type="password"
+                                                            class="form-control" name="secret"
+                                                            placeholder="Nhập mật khẩu cấp 2">
+                                                    </div>
+                                                </div>
+
+                                                <%}%>
+
+
+                                        </div>
+
+                                        <div class="row mt-3 mt-lg-4">
+                                            <div class="col-12 text-center">
+                                                <button class="btn btn-primary btn-send_card waves-effect waves-light">
+                                                    Rút tiền ngay
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-5 mt-5 mt-md-0">
+                                <div class="section-heading">
+                                    <div class="section-heading_subtitle text-left">
+                                        Hạn mức và phí:
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="section-table">
+                                        <tbody>
+
+                                            <tr>
+                                                <td class="bg-light">Tổng hạn mức ngày</td>
+                                                <td class="font-weight-bold bg-white"><strong>Không giới hạn</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light">Số tiền tối thiểu</td>
+                                                <td class="font-weight-bold bg-white"><strong>
+                                                        <%=
+                                                            String(Math.round(setting.withdraw.min)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                            đ
+                                                    </strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Số tiền tối đa</td>
+                                                <td class="font-weight-bold bg-white"><strong>
+                                                        <%=
+                                                            String(Math.round(setting.withdraw.max)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                            đ
+                                                    </strong></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="section-heading mt-5">
+                                    <div class="section-heading_subtitle text-left">
+                                        Cổng thanh toán gachthe1s:
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="section-table">
+                                        <tbody class="scroll-data">
+                                            <tr>
+                                               
+                                                <th class="text-center">Mức rút</th>
+                                                <th class="text-center">Phí</th>
+
+                                            </tr>
+                                            
+                                                <%for(let i=0;i<fees.length;i++){%>
+                                                    <tr>
+
+                                                    
+                                                   
+                                                    <td><%-String(Math.round(fees[i].from)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> đến  <%-String(Math.round(fees[i].to)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> vnđ</td>
+                                                    <td>
+                                                        <%if(fees[i].isfeeVnd){%>
+                                                            <%-String(Math.round(fees[i].feeVnd)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> VNĐ
+                                                        <%}else{%>
+                                                            <%-String(Math.round(fees[i].percent)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>%
+                                                        <%}%>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                                
+                                         
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-5">
+                                <div class="section-heading">
+                                    <div class="section-heading_subtitle text-left">
+                                        Lịch sử rút tiền
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="section-table">
+                                        <tbody>
+                                            <tr>
+                                                <th>Đơn hàng</th>
+
+                                                <th class="text-center">Số tiền</th>
+                                              
+                                                <th>Tài khoản</th>
+                                                <th>Tên</th>
+                                                <th>Ngày tạo</th>
+                                                <th class="text-center">Trạng thái</th>
+                                            </tr>
+                                            <% for (var i=0; i < data.length; i++) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= data[i].transid %>
+                                                    </td>
+                                                    <td>-<%=String(data[i].amount).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                            VNĐ</td>
+                                                   
+
+                                                    <td>
+
+
+                                                        <%= data[i].bank.stk %>
+                                                    </td>
+                                                    <td>
+
+
+                                                        <%= data[i].bank.name %>
+                                                    </td>
+                                                    <td>
+                                                        <%= new Date(Date.parse(data[i].time)).toLocaleString("pt-BR")%>
+                                                    </td>
+                                                    <td>
+
+                                                        <%if(data[i].status==-1){%>
+                                                            <span class="badge badge-warning template-1-badge">CHỜ THANH
+                                                                TOÁN</span>
+                                                            <%}else if(data[i].status==1){%>
+                                                                <span class="badge badge-success template-1-badge">HOÀN
+                                                                    THÀNH</span>
+                                                                <%}else if(data[i].status==2){%>
+
+                                                                    <span class="badge badge-danger template-1-badge">ĐÃ
+                                                                        HỦY</span>
+
+                                                                    <%}%>
+                                                    </td>
+
+
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+
+                                    </table>
+                                    <% if (pages> 1) { %>
+                                        <nav aria-label="...">
+                                            <ul class="pagination">
+                                                <% if (current==1) { %>
+                                                    <li class="page-item disabled"><a class="page-link">Đầu</a></li>
+                                                    <% } else { %>
+                                                        <li><a class="page-link" href="/withdraw/gt1s?page=1">Đầu</a></li>
+                                                        <% } %>
+                                                            <% var i=(Number(current)> 2 ? Number(current) - 2 : 1) %>
+                                                                <% if (i !==1) { %>
+                                                                    <li class="disabled"><a class="page-link">...</a>
+                                                                    </li>
+                                                                    <% } %>
+                                                                        <% for (; i <=(Number(current) + 2) && i
+                                                                            <=pages; i++) { %>
+                                                                            <% if (i==current) { %>
+                                                                                <li class="page-item active"><a
+                                                                                        class="page-link">
+                                                                                        <%= i %>
+                                                                                    </a></li>
+                                                                                <% } else { %>
+                                                                                    <li><a class="page-link"
+                                                                                            href="/withdraw/gt1s?page=<%= i %>">
+                                                                                            <%= i %>
+                                                                                        </a></li>
+                                                                                    <% } %>
+                                                                                        <% if (i==Number(current) + 2 &&
+                                                                                            i < pages) { %>
+                                                                                            <li
+                                                                                                class="page-item disabled">
+                                                                                                <a
+                                                                                                    class="page-link">...</a>
+                                                                                            </li>
+                                                                                            <% } %>
+                                                                                                <% } %>
+                                                                                                    <% if
+                                                                                                        (current==pages)
+                                                                                                        { %>
+                                                                                                        <li
+                                                                                                            class="page-item disabled">
+                                                                                                            <a
+                                                                                                                class="page-link">Cuối</a>
+                                                                                                        </li>
+                                                                                                        <% } else { %>
+                                                                                                            <li><a class="page-link"
+                                                                                                                    href="/withdraw/gt1s?page=<%= pages %>">Cuối</a>
+                                                                                                            </li>
+                                                                                                            <% } %>
+                                            </ul>
+                                        </nav>
+                                        <% } %>
+                                </div>
+                            </div>
+                        </div>
+
+        </div>
+    </div>
+</div>

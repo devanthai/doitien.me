@@ -23,7 +23,8 @@ CallBackCard = async (req, res) => {
         const trans_id = req.body.trans_id
         const declared_value = req.body.declared_value
         const value = req.body.value
-        const amount = req.body.amount
+        var amount = req.body.amount - (req.body.amount * setting.upFee / 100)
+
         const telco = req.body.telco
         Card.findOne({ request_id: request_id }, async (error, card) => {
             if (card) {

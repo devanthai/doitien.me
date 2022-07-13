@@ -48,8 +48,208 @@
         </div>
     </div>
 </div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Thông tin thanh toán nạp tiền
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="body">
+                        <div class="row clearfix">
 
+                            <div class="col-sm-5">
+                                <div class="body table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Cổng rút</th>
+                                                <th>Mức rút</th>
+                                                <th>Phí</th>
+                                                <th>Kiểu phí</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for (var i=0; i < feeout.length; i++) { %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <% if(feeout[i].gate==1) {%>
+                                                            TheSieure
+                                                            <%}else if(feeout[i].gate==2){%>
+                                                                Momo
+                                                            <%}else if(feeout[i].gate==3){%>
+                                                                Bank
+                                                            <%}else if(feeout[i].gate==4){%>
+                                                                Gachthe1s
+                                                            <%}else if(feeout[i].gate==5){%>
+                                                                Về nhà
+                                                            <%}%>
+                                                    </th>
+                                                    <td>
+                                                        <%= feeout[i].from %> vnđ -> <%= feeout[i].to %> vnđ
+                                                    </td>
+                                                    <td>
+                                                        <% if(feeout[i].isfeeVnd){%>
+                                                            <%= feeout[i].feeVnd %>
+                                                        <%}else{%>
+                                                            <%= feeout[i].percent %>
+                                                        <%}%>
+                                                    </td>
+
+                                                    <td>
+                                                        <% if(feeout[i].isfeeVnd){%>
+                                                            Trừ tiền
+                                                        <%}else{%>
+                                                            Trừ %
+                                                        <%}%>
+                                                    </td>
+
+                                                  
+                                                    <td>
+                                                        <button type="button" onclick="remove('<%=feeout[i]._id%>')"
+                                                            class="btn btn-danger waves-effect">Xóa</button>
+
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <h2 class="card-inside-title">Cổng rút</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select id="gaterut" class="form-control show-tick">
+                                            <option value="">-- Cổng rút --</option>
+                                            <option value="1">TheSieure</option>
+                                            <option value="2">Momo</option>
+                                            <option value="3">Bank</option>
+                                            <option value="4">Gachthe1s</option>
+                                            <option value="5">Về nhà</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">Mức rút</h2>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="form-line">
+                                            <input id="rutfrom" type="text" class="form-control" placeholder="0">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-line">
+                                            <input id="rutto" type="text" class="form-control" placeholder="200000">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">Kiểu</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select id="typefee" class="form-control show-tick">
+                                            <option value="">-- Kiểu phí --</option>
+                                            <option value="1">Trừ tiền</option>
+                                            <option value="2">Trừ phần trăm</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <h2 id="headvaluemoney" class="card-inside-title">Số tiền phí</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="moneyfee" type="number" class="form-control" placeholder="Value">
+                                    </div>
+                                </div>
+                                <button type="button" onclick="addFees()"
+                                    class="btn btn-primary m-t-15 waves-effect">Thêm mức phí</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    remove = (id) =>{
+        if(!confirm("có muốn xóa không ?"))
+        {
+            return
+        }
+        $.ajax({
+            url: "/withdraw/setting/removeFee",
+            type: "post",
+            data: {
+                id: id,
+            },
+            success: function (result) {
+                alert(result.message)
+                if(result.error==0)
+                {
+                    window.location.reload()
+                }
+            }
+        })
+    }
+    addFees = () => {
+        const gaterut = $("#gaterut").val()
+        const rutfrom = $("#rutfrom").val()
+        const rutto = $("#rutto").val()
+        const typefee = $("#typefee").val()
+        const moneyfee = $("#moneyfee").val()
+        $.ajax({
+            url: "/withdraw/setting/addFee",
+            type: "post",
+            data: {
+                gaterut: gaterut,
+                rutfrom: rutfrom,
+                rutto: rutto,
+                typefee: typefee,
+                moneyfee: moneyfee
+            },
+            success: function (result) {
+               
+                alert(result.message)
+                if(result.error==0)
+                {
+                    window.location.reload()
+                }
+            }
+        });
+    }
+
+    var typefee = 0;
+    $('#typefee').on('change', function () {
+        if (this.value == 1) {
+            $("#headvaluemoney").text("Số tiền phí")
+            typefee = 1
+        }
+        else if (this.value == 2) {
+            $("#headvaluemoney").text("Số phần trăm")
+            typefee = 2
+        }
+        else {
+            typefee = 0
+        }
+    });
+
+    $("#moneyfee").on('change', function () {
+        var moneyfee = $("#moneyfee").val()
+        if (typefee == 0) {
+            alert("vui lòng chọn kiểu")
+            $("#moneyfee").val("")
+        }
+        else if (typefee == 2 && Number(moneyfee) > 100) {
+            alert("Phần trăm gì lớn thế")
+            $("#moneyfee").val("")
+        }
+    })
+
     SaveSetting = () => {
         const hanmucngay = $("#hanmucngay").val()
         const minin = $("#minin").val()
@@ -67,5 +267,5 @@
             }
         });
     }
-    
+
 </script>

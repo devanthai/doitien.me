@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const withdrawController = require("../controllers/withDrawController")
 
+router.post("/setting/addfee",withdrawController.addFee)
+router.post("/setting/removeFee",withdrawController.removeFee)
+
 router.get("/setting",withdrawController.configView)
 router.post("/setting/savesetting",withdrawController.saveSetting)
 router.get("/listWithdraw",withdrawController.withDraw)

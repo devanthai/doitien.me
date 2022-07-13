@@ -15,17 +15,13 @@ app.use(cookieSession({
     secret: "drgdhrftyhrtyerterTTT563...t",
     name: 'session',
     keys: new Keygrip(['key1', 'key2'], 'SHA384', 'base64'),
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    maxAge: 24 * 60 * 60 * 24, // 24 hours
     cookie: {
         httpOnly: true,
         secure: true
     }
 }))
-app.use(session({
-    secret: 'sdfsdfgdfgdfg',
-    saveUninitialized: true,
-    resave: true
-}));
+
 app.use(flash());
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }))

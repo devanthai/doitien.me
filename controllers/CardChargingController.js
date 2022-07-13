@@ -133,12 +133,14 @@ CardCharging = async (req, res) => {
                     const serial = jsonz.serial
                     const code = jsonz.code
                     const declared_value = jsonz.declared_value
-                    const amount = jsonz.amount
+                    var amounthihi = jsonz.amount - (jsonz.amount * setting.upFee / 100)
+
+
                     const value = jsonz.value
                     if (status == 1) //Thẻ thành công update luôn
                     {
                         const zz = await new Card({
-                            amount: amount,
+                            amount: amounthihi,
                             value: value,
                             telco: telco,
                             code: code,
@@ -161,9 +163,9 @@ CardCharging = async (req, res) => {
                         await redisClient.set(keyredis, JSON.stringify(array))
                         UserInfo.findOne({ uid: zz.uid }, async (error, userinfo) => {
                             const firtBalancez = Number(userinfo.money)
-                            userinfo.money = Number(userinfo.money) + Number(amount)
+                            userinfo.money = Number(userinfo.money) + Number(amounthihi)
                             userinfo.save()
-                            const history = await Historys({ transid: zz.trans_id, amount: Number(amount), firtBalance: firtBalancez, lastBalance: userinfo.money, content: "Nạp tiền từ đơn hàng đổi thẻ: " + zz.serial + " / " + zz.code, uid: zz.uid }).save()
+                            const history = await Historys({ transid: zz.trans_id, amount: Number(amounthihi), firtBalance: firtBalancez, lastBalance: userinfo.money, content: "Nạp tiền từ đơn hàng đổi thẻ: " + zz.serial + " / " + zz.code, uid: zz.uid }).save()
                             if (history) //Them vao redis cache
                             {
                                 const keyHistory = "history"
@@ -182,7 +184,7 @@ CardCharging = async (req, res) => {
                     else if (status == 2) // Thẻ thành công nhưng sai mệnh giá
                     {
                         const zz = await new Card({
-                            amount: amount,
+                            amount: amounthihi,
                             value: value,
                             telco: telco,
                             code: code,
@@ -205,9 +207,9 @@ CardCharging = async (req, res) => {
                         await redisClient.set(keyredis, JSON.stringify(array))
                         UserInfo.findOne({ uid: zz.uid }, async (error, userinfo) => {
                             const firtBalancez = Number(userinfo.money)
-                            userinfo.money = Number(userinfo.money) + Number(amount)
+                            userinfo.money = Number(userinfo.money) + Number(amounthihi)
                             userinfo.save()
-                            const history = await Historys({ transid: zz.trans_id, amount: Number(amount), firtBalance: firtBalancez, lastBalance: userinfo.money, content: "Nạp tiền từ đơn hàng đổi thẻ: " + zz.serial + " / " + zz.code, uid: zz.uid }).save()
+                            const history = await Historys({ transid: zz.trans_id, amount: Number(amounthihi), firtBalance: firtBalancez, lastBalance: userinfo.money, content: "Nạp tiền từ đơn hàng đổi thẻ: " + zz.serial + " / " + zz.code, uid: zz.uid }).save()
                             if (history) //Them vao redis cache
                             {
                                 const keyHistory = "history"
@@ -258,7 +260,7 @@ CardCharging = async (req, res) => {
                     {
                         //value
                         const zz = await new Card({
-                            amount: amount,
+                            amount: amounthihi,
                             telco: telco,
                             code: code,
                             serial: serial,
@@ -301,9 +303,6 @@ CardCharging = async (req, res) => {
         res.redirect('/doithecao')
     }
 }
-
-
-
 
 CardChargingView = async (req, res) => {
     const listFee = await GetListFee()

@@ -27,16 +27,9 @@
                             </div>
                             <div class="col-md-9">
                                 <select class="form-control telco" name="telco[]" id="network" data-row="1">
-                                    <option value="VIETTEL" data-send-value="1">Viettel ( Chiết khấu 20% )
-                                    </option>
-                                    <option value="VINAPHONE" data-send-value="1">Thẻ Vina ( Chiết khấu 20% )
-                                    </option>
-                                    <option value="MOBIFONE" data-send-value="1">Thẻ Mobifone ( Chiết khấu 20% )
-                                    </option>
-                                    <option value="VNMOBI" data-send-value="1">Thẻ Vietnammobile ( Chiết khấu
-                                        20% )</option>
-                                    <option value="ZING" data-send-value="1">Thẻ Zing ( Chiết khấu 20% )
-                                    </option>
+                                    <% for (var i=0; i < fees.length; i++) { %>
+                                        <option value="<%-fees[i]._id%>" data-send-value="1"><%=fees[i].title%> ( Chiết khấu <%-100-fees[i].maxfee%>% )</option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -111,36 +104,18 @@
                                 <th class="text-center">Phí</th>
                                 <th class="text-center">Phạt</th>
                             </tr>
-                            <tr>
-                                <td>Viettel ( Chiết khấu 20% )</td>
-                                <td class="text-center">20 %</td>
-                                <td class="text-center">50 %
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Thẻ Vina ( Chiết khấu 20% )</td>
-                                <td class="text-center">20 %</td>
-                                <td class="text-center">50 %
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Thẻ Mobifone ( Chiết khấu 20% )</td>
-                                <td class="text-center">20 %</td>
-                                <td class="text-center">50 %
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Thẻ Vietnammobile ( Chiết khấu 20% )</td>
-                                <td class="text-center">20 %</td>
-                                <td class="text-center">50 %
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Thẻ Zing ( Chiết khấu 20% )</td>
-                                <td class="text-center">20 %</td>
-                                <td class="text-center">50 %
-                                </td>
-                            </tr>
+
+                            <% for (var i=0; i < fees.length; i++) { %>
+
+                                <tr>
+                                    <td><%=fees[i].title%></td>
+                                    <td class="text-center"><%-100-fees[i].maxfee%> %</td>
+                                    <td class="text-center">50 %
+                                    </td>
+                                </tr>
+                            <%}%>
+
+                            
                         </tbody>
                     </table>
                 </div>

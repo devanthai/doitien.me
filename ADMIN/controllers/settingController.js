@@ -1,5 +1,15 @@
 const Setting = require("../modules/Setting")
 const CardListBuy = require("../modules/CardListBuy")
+
+SaveUpfee = async (req, res) => {
+    try {
+        const setting = await Setting.findOneAndUpdate({}, { upFee: req.body.upFee })
+        res.send({ message: "Lưu thành công " })
+    } catch (err) {
+        res.send({ message: "Lưu thất bại lỗi " + err })
+    }
+}
+
 SaveSettingApiCard = async (req, res) => {
     try {
         const setting = await Setting.findOneAndUpdate({}, { apicard: req.body })
@@ -107,4 +117,4 @@ DeleteBuyCard = async (req, res) => {
         res.send({error:1, message: "Xoa card that bai " })
     }
 }
-module.exports = { SaveSettingApiCard, SettingView, SaveSettingThongBao, SavelistFeeSort, SaveMain, SaveApiBuyCard, SavelistBuyCardSort, EditBuyCard, DeleteBuyCard }
+module.exports = { SaveSettingApiCard, SettingView, SaveSettingThongBao, SavelistFeeSort, SaveMain, SaveApiBuyCard, SavelistBuyCardSort, EditBuyCard, DeleteBuyCard,SaveUpfee }

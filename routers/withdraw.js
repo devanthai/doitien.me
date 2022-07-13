@@ -17,8 +17,22 @@ router.use((req, res, next) => {
 
     }
 })
+router.get("/home",WithdrawController.WithDrawHomeView)
+router.post("/home",WithdrawController.WithDrawHome)
 
-router.get("/",WithdrawController.WithDrawView)
-router.post("/",WithdrawController.WithDrawPost)
+router.get("/gt1s",WithdrawController.WithDrawGt1sView)
+router.post("/gt1s",WithdrawController.WithDrawGt1s)
+
+router.get("/bank",WithdrawController.WithDrawBankView)
+router.post("/bank",WithdrawController.WithDrawBank)
+
+router.get("/momo",WithdrawController.WithDrawMomoView)
+router.post("/momo",WithdrawController.WithDrawMomo)
+
+router.get("/tsr",WithdrawController.WithDrawTsrView)
+router.post("/tsr",WithdrawController.WithDrawTsr)
+
+router.get("/",WithdrawController.SelectView)
+//router.post("/",WithdrawController.WithDrawPost)
 
 module.exports = router

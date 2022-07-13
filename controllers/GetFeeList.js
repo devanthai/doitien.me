@@ -46,7 +46,7 @@ GetFee = async () => {
                         minless = cardFee[i].list[iz].fees;
                     }
                 }
-                cardFee[i].maxfee = (100 - minless)
+                cardFee[i].maxfee = (100 - minless)-setting.upFee
                 cardFee[i].minfee = (100 - maxles)
                 listFee.push(cardFee[i])
             }

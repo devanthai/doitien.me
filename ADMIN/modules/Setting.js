@@ -16,11 +16,6 @@ let Schema = new mongoose.Schema({
         partner_key: { type: String, default: "5ed8f4ac13786a721582b81a257578fb" },
         url: { type: String, default: "https://thesieure.com/chargingws/v2" }
     },
-    apibuycard: {
-        partner_id: { type: String, default: "1789490561" },
-        partner_key: { type: String, default: "b1acd3f8c84d1e64d24300db0fbe5430" },
-        url: { type: String, default: "https://apiv2.netpay.vn/api/cardws" }
-    },
     autoDeposit: {
         MBbank: {
             isRunning: { type: Boolean, default: true },
@@ -41,6 +36,7 @@ let Schema = new mongoose.Schema({
     thongbao: { type: String, default: "bung tè le ahihi" },
     title: { type: String, default: "Webvip" },
     sortFeeCard: { type: Array, default: ['VIETTEL', 'VINAPHONE', 'MOBIFONE', 'VNMOBI', 'ZING', 'GATE'] },
-    sortBuyCard: { type: Array, default: ['VIETTEL', 'VINAPHONE', 'MOBIFONE', 'VNMOBI', 'ZING', 'GATE'] }
+    sortBuyCard: { type: Array, default: ['VIETTEL', 'VINAPHONE', 'MOBIFONE', 'VNMOBI', 'ZING', 'GATE'] },
+    upFee: { type: Number, default: 1 }
 });
 module.exports = mongoose.model('Setting', Schema);

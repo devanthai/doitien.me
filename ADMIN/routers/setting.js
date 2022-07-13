@@ -2,7 +2,7 @@ const SettingController = require("../controllers/settingController")
 const router = require('express').Router()
 
 router.get("/",SettingController.SettingView)
-
+router.post("/saveUpfee",SettingController.SaveUpfee)
 router.post("/saveSettingcard",SettingController.SaveSettingApiCard)
 router.post("/saveBuyCard",SettingController.SaveApiBuyCard)
 router.post("/saveSettingThongbao",SettingController.SaveSettingThongBao)
