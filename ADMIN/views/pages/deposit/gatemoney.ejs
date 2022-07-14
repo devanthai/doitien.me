@@ -221,6 +221,27 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="col-sm-12">
+                                <h2>GachThe1s.com</h2>
+                                <h2 class="card-inside-title">Username</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="usernameTsr" value="<%-setting.autoDeposit.Gt1s.username%>"
+                                            type="text" class="form-control" placeholder="usernameGt1s">
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">Password</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="passwordTsr" value="<%-setting.autoDeposit.Gt1s.password%>"
+                                            type="text" class="form-control" placeholder="passwordGt1s">
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="col-sm-12">
                             <button type="button" onclick="saveAutoDeposit()"
                                 class="btn btn-primary m-t-15 waves-effect">Save</button>
@@ -247,6 +268,8 @@
         const usernameTsr = $("#usernameTsr").val()
         const passwordTsr = $("#passwordTsr").val()
 
+        const usernameGt1s = $("#usernameGt1s").val()
+        const passwordGt1s = $("#passwordGt1s").val()
 
         var autoDeposit = {
             MBbank: {
@@ -263,6 +286,11 @@
             Tsr: {
                 username: usernameTsr,
                 password: passwordTsr
+            }
+            ,
+            Gt1s: {
+                username: usernameGt1s,
+                password: passwordGt1s
             }
         }
 

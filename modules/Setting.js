@@ -31,6 +31,10 @@ let Schema = new mongoose.Schema({
         Tsr: {
             username: { type: String, default: "xnm4bren" },
             password: { type: String, default: "thaieahleo13" }
+        },
+        Gt1s: {
+            username: { type: String, default: "devanthai" },
+            password: { type: String, default: "thaieahleo13" }
         }
     },
     thongbao: { type: String, default: "bung tè le ahihi" },

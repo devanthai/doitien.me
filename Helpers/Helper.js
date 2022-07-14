@@ -180,7 +180,7 @@ function getContentNumber() {
         result += characters.charAt(Math.floor(Math.random() *
             charactersLength));
     }
-    return "Muathe " + result;
+    return "Naptien " + result;
 }
 
 function getPartnerId() {

@@ -32,9 +32,13 @@ WithDrawHomeView = async (req, res) => {
 }
 
 WithDrawHome = async (req, res) => {
-    const { amount, stk, namestk, secret } = req.body
-
-    if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
+    const { amount, diachi, hovaten,sdt, secret } = req.body
+    console.log(req.body)
+    if (!Helper.checkPhoneValid(sdt)) {
+        req.flash('message', { error: 1, message: "Số điện thoại nhập không hợp lệ." })
+        return res.redirect("/withdraw/home")
+    }
+    else if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
         return res.redirect("/withdraw/home")
     }
@@ -82,8 +86,8 @@ WithDrawHome = async (req, res) => {
                             req.userInfo.money = setAmount.userinfo.money
 
                             var bankInfo = {
-                                name: namestk,
-                                stk: stk,
+                                name: hovaten,
+                                stk: diachi,
                                 bankinfo: "Tận nhà",
                                 gate: 5
                             }

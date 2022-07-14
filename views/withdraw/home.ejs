@@ -69,28 +69,36 @@
                                                             VND</small>
                                             </div>
                                         </div>
-
-
                                         <div class="row align-items-center form-group mb-3">
                                             <div class="col-md-3">
-                                                <label for="" class="font-weight-bold mb-0">Số Tài khoản:</label>
+                                                <label for="" class="font-weight-bold mb-0">Số điện thoại:</label>
                                             </div>
                                             <div class="col-md-9">
-                                                <input name="stk" type="text" class="form-control" id="stk"
-                                                    placeholder="Nhập Số Tài khoản nhận tiền" value="">
+                                                <input name="sdt" type="text" class="form-control" id="sdt"
+                                                    placeholder="Nhập Số điện thoại giao tiền" value="">
                                             </div>
                                         </div>
-
-
-                                        <div class="row align-items-center form-group">
+                                        <div class="row align-items-center form-group mb-3">
                                             <div class="col-md-3">
-                                                <label for="" class="font-weight-bold mb-0">Tên Chủ TK:</label>
+                                                <label for="" class="font-weight-bold mb-0">Họ tên người nhận:</label>
                                             </div>
                                             <div class="col-md-9">
-                                                <input name="namestk" type="text" class="form-control" id="namestk"
-                                                    placeholder="Nhập tên chủ tk nhận tiền" value="">
+                                                <input name="hovaten" type="text" class="form-control" id="hovaten"
+                                                    placeholder="Nhập họ tên người nhận" value="">
                                             </div>
                                         </div>
+                                        <div class="row align-items-center form-group mb-3">
+                                            <div class="col-md-3">
+                                                <label for="" class="font-weight-bold mb-0">Địa chỉ:</label>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input name="diachi" type="text" class="form-control" id="diachi"
+                                                    placeholder="Nhập địa chỉ nhận tiền" value="">
+                                            </div>
+                                        </div>
+
+
+                                       
                                         <div class="row align-items-center form-group mb-4">
                                             
                                             <%if(userInfo.isActivePassLevel2){%>
@@ -203,7 +211,7 @@
 
                                                 <th class="text-center">Số tiền</th>
                                               
-                                                <th>STK</th>
+                                                <th>Địa chỉ</th>
                                                 <th>Tên</th>
                                                 <th>Ngày tạo</th>
                                                 <th class="text-center">Trạng thái</th>
