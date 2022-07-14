@@ -136,7 +136,7 @@ auto = async () => {
     try {
         const setting = await Setting.findOne({})
         console.log(setting.autoDeposit.Gt1s)
-        browser = await puppeteer.launch({ args: ['--no-sandbox', '--single-process', '--no-zygote'], headless: false });
+        browser = await puppeteer.launch({ args: ['--no-sandbox', '--single-process', '--no-zygote'], headless: true });
         page = await browser.newPage();
         if (cookies == null) {
             await page.goto('https://gachthe1s.com/account/login', { waitUntil: 'networkidle0' });
