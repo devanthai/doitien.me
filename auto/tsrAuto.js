@@ -93,7 +93,7 @@ setInterval(async () => {
             });
 
             if (donpick != null && donpick.gate.toLowerCase().includes("tsr")) {
-                if (creditAmount == donpick.amount && description.split("muathe").length == 2) {
+                if (creditAmount == donpick.amount && description.split("naptien").length == 2) {
                     await Deposit.findByIdAndUpdate(donpick._id, { status: 1 })
                     var userI = await UserInfo.findOneAndUpdate({ uid: donpick.uid }, { $inc: { money: donpick.amount } })
                     const history = await History({ transid: donpick.transid, amount: creditAmount, firtBalance: userI.money, lastBalance: userI.money + creditAmount, content: "Nạp tiền từ TSR", uid: donpick.uid }).save()

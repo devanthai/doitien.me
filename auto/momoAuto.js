@@ -20,7 +20,7 @@ setInterval(async () => {
                         const description = element.noidung.toLowerCase()
                         var creditAmount = element.sotien
                         creditAmount = Number(creditAmount)
-                        if (creditAmount != 0 && description.split("muathe").length == 2) {
+                        if (creditAmount != 0 && description.split("naptien").length == 2) {
                             const deposits = await Deposit.find({ $text: { $search: description }, status: 0 })
                             var donpick = null
                             deposits.forEach(elementz => {
