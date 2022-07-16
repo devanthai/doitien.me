@@ -162,6 +162,7 @@ auto = async () => {
             });
             cheerioTableparser($);
             var data = $(".col-sm-12.table-responsive").parsetable(true, true, true);
+            console.log(data)
             for (var i = 1; i < data[0].length; i++) {
                 var magd = data[0][i];
                 var sotien = data[1][i];
