@@ -148,41 +148,41 @@
                         <div class="row clearfix">
 
                             <div class="col-sm-12">
-                                <h2>MB_BANK</h2>
+                                <h2>VCB_BANK</h2>
                                 <h2 class="card-inside-title">Username</h2>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input id="UsernameMb" value="<%-setting.autoDeposit.MBbank.username%>"
+                                        <input id="UsernameVcb" value="<%-setting.autoDeposit.VCBbank.username%>"
                                             type="text" class="form-control" placeholder="Username">
                                     </div>
                                 </div>
                                 <h2 class="card-inside-title">Password</h2>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input id="PasswordMb" value="<%-setting.autoDeposit.MBbank.password%>"
+                                        <input id="PasswordVcb" value="<%-setting.autoDeposit.VCBbank.password%>"
                                             type="text" class="form-control" placeholder="Password">
                                     </div>
                                 </div>
                                 <h2 class="card-inside-title">accountNumber</h2>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input id="accountNumberMb"
-                                            value="<%-setting.autoDeposit.MBbank.accountNumber%>" type="text"
-                                            class="form-control" placeholder="accountNumberMb">
+                                        <input id="accountNumberVcb"
+                                            value="<%-setting.autoDeposit.VCBbank.accountNumber%>" type="text"
+                                            class="form-control" placeholder="accountNumberVcb">
                                     </div>
                                 </div>
                                 <h2 class="card-inside-title">Url Api</h2>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input id="urlMb" type="text" value="<%-setting.autoDeposit.MBbank.urlApi%>"
+                                        <input id="urlVcb" type="text" value="<%-setting.autoDeposit.VCBbank.urlApi%>"
                                             class="form-control" placeholder="urlMb">
                                     </div>
                                 </div>
                                 <h2 class="card-inside-title">IsRunning</h2>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input id="isRunningMb" type="text" value="<%-setting.autoDeposit.MBbank.isRunning%>"
-                                            class="form-control" placeholder="isRunningMb">
+                                        <input id="isRunningVcb" type="text" value="<%-setting.autoDeposit.VCBbank.isRunning%>"
+                                            class="form-control" placeholder="isRunningVcb">
                                     </div>
                                 </div>
                             </div>
@@ -256,11 +256,11 @@
 </div>
 <script>
     saveAutoDeposit = () => {
-        const UsernameMb = $("#UsernameMb").val()
-        const PasswordMb = $("#PasswordMb").val()
-        const accountNumberMb = $("#accountNumberMb").val()
-        const urlMb = $("#urlMb").val()
-        const isRunningMb = $("#isRunningMb").val()
+        const UsernameVcb = $("#UsernameVcb").val()
+        const PasswordVcb = $("#PasswordVcb").val()
+        const accountNumberVcb = $("#accountNumberVcb").val()
+        const urlVcb = $("#urlVcb").val()
+        const isRunningVcb = $("#isRunningVcb").val()
 
         const phoneNumberMomo = $("#phoneNumberMomo").val()
         const urlApi = $("#urlApi").val()
@@ -272,12 +272,12 @@
         const passwordGt1s = $("#passwordGt1s").val()
 
         var autoDeposit = {
-            MBbank: {
-                username: UsernameMb,
-                password: PasswordMb,
-                accountNumber: accountNumberMb,
-                urlApi: urlMb,
-                isRunning: isRunningMb,
+            VCBbank: {
+                username: UsernameVcb,
+                password: PasswordVcb,
+                accountNumber: accountNumberVcb,
+                urlApi: urlVcb,
+                isRunning: isRunningVcb,
             },
             Momo: {
                 phoneNumber: phoneNumberMomo,

@@ -28,8 +28,7 @@ setInterval(async () => {
                                     donpick = elementz
                                 }
                             });
-                            if (donpick != null && donpick.gate.toLowerCase().includes("momo")) {
-
+                            if (donpick != null && donpick.gate.toLowerCase().includes("mm")) {
                                 if (creditAmount == donpick.amount) {
                                     await Deposit.findByIdAndUpdate(donpick._id, { status: 1 })
                                     var userI = await UserInfo.findOneAndUpdate({ uid: donpick.uid }, { $inc: { money: donpick.amount } })

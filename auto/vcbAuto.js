@@ -11,15 +11,16 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') })
 mongoose.connect(process.env.DB_CONNECT, () => console.log('Connected to db'));
 setInterval(async () => {
     const setting = await Setting.findOne({})
-    console.log(setting.autoDeposit.MBbank.isRunning)
-    if (setting.autoDeposit.MBbank.isRunning == true) {
-        console.log("auto mb bank")
+    console.log(setting.autoDeposit.VCBbank.isRunning)
+    if (setting.autoDeposit.VCBbank.isRunning == true) {
+        console.log("auto vcb bank")
         var DATA = {
-            username: setting.autoDeposit.MBbank.username,
-            password: setting.autoDeposit.MBbank.password,
-            accountNumber: setting.autoDeposit.MBbank.accountNumber,
+            username: setting.autoDeposit.VCBbank.username,
+            password: setting.autoDeposit.VCBbank.password,
+            accountNumber: setting.autoDeposit.VCBbank.accountNumber,
+            day:0
         }
-        var Urlapi = setting.autoDeposit.MBbank.urlApi
+        var Urlapi = setting.autoDeposit.VCBbank.urlApi
         request.post({
             url: Urlapi,
             json: DATA
@@ -28,9 +29,8 @@ setInterval(async () => {
                 var json = (body)
                 if (json.success == true) {
                     json.data.forEach(async (element) => {
-                        var description = element.description.toLowerCase()
-                        var creditAmount = element.creditAmount
-                        creditAmount = Number(creditAmount)
+                        var description = element.Description.toLowerCase()
+                        var creditAmount = Number(element.Amount.replaceAll(",", ""))
                         if (creditAmount != 0 && description.split("naptien").length == 2) {
                             const deposits = await Deposit.find({ $text: { $search: description }, status: 0 })
                             var donpick = null
@@ -39,11 +39,11 @@ setInterval(async () => {
                                     donpick = elementz
                                 }
                             });
-                            if (donpick != null && donpick.gate.toLowerCase().includes("mb")) {
+                            if (donpick != null && donpick.gate.toLowerCase().includes("vcb")) {
                                 if (creditAmount == donpick.amount) {
                                     await Deposit.findByIdAndUpdate(donpick._id, { status: 1 })
                                     var userI = await UserInfo.findOneAndUpdate({ uid: donpick.uid }, { $inc: { money: donpick.amount } })
-                                    const history = await History({ transid: donpick.transid, amount: creditAmount, firtBalance: userI.money, lastBalance: userI.money + creditAmount, content: "Nạp tiền từ MB BANK", uid: donpick.uid }).save()
+                                    const history = await History({ transid: donpick.transid, amount: creditAmount, firtBalance: userI.money, lastBalance: userI.money + creditAmount, content: "Nạp tiền từ VCB BANK", uid: donpick.uid }).save()
                                     if (history) {
                                         const keyHistory = "history"
                                         const keyRedisHistory = keyHistory + donpick.uid

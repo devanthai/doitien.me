@@ -17,6 +17,13 @@ let Schema = new mongoose.Schema({
         url: { type: String, default: "https://thesieure.com/chargingws/v2" }
     },
     autoDeposit: {
+        VCBbank: {
+            isRunning: { type: Boolean, default: true },
+            username: { type: String, default: "1" },
+            password: { type: String, default: "1" },
+            accountNumber: { type: String, default: "1" },
+            urlApi: { type: String, default: "http://vcb.500kz.com/api/vcb/getTransactions" },
+        },
         MBbank: {
             isRunning: { type: Boolean, default: true },
             username: { type: String, default: "0369004565" },
