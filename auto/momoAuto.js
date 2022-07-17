@@ -20,7 +20,10 @@ setInterval(async () => {
                         const description = element.noidung.toLowerCase()
                         var creditAmount = element.sotien
                         creditAmount = Number(creditAmount)
+
                         if (creditAmount != 0 && description.split("naptien").length == 2) {
+                            console.log(description,creditAmount)
+
                             const deposits = await Deposit.find({ $text: { $search: description }, status: 0 })
                             var donpick = null
                             deposits.forEach(elementz => {
@@ -28,6 +31,8 @@ setInterval(async () => {
                                     donpick = elementz
                                 }
                             });
+                            console.log(donpick)
+
                             if (donpick != null && donpick.gate.toLowerCase().includes("mm")) {
                                 if (creditAmount == donpick.amount) {
                                     await Deposit.findByIdAndUpdate(donpick._id, { status: 1 })
