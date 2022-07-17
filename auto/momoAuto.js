@@ -20,6 +20,7 @@ setInterval(async () => {
                         const description = element.noidung.toLowerCase()
                         var creditAmount = element.sotien
                         creditAmount = Number(creditAmount)
+                        console.log(description,description.split("naptien").length)
 
                         if (creditAmount != 0 && description.split("naptien").length == 2) {
                             console.log(description,creditAmount)
