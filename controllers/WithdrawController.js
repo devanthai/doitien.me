@@ -32,8 +32,8 @@ WithDrawHomeView = async (req, res) => {
 }
 
 WithDrawHome = async (req, res) => {
-    const { amount, diachi, hovaten,sdt, secret } = req.body
-    console.log(req.body)
+    var { amount, diachi, hovaten,sdt, secret } = req.body
+    amount = Number(amount)
     if (!Helper.checkPhoneValid(sdt)) {
         req.flash('message', { error: 1, message: "Số điện thoại nhập không hợp lệ." })
         return res.redirect("/withdraw/home")
@@ -152,8 +152,8 @@ WithDrawGt1sView = async (req, res) => {
 }
 
 WithDrawGt1s = async (req, res) => {
-    const { amount, stk, namestk, secret } = req.body
-
+    var { amount, stk, namestk, secret } = req.body
+    amount = Number(amount)
     if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
         return res.redirect("/withdraw/bank")
@@ -267,8 +267,8 @@ WithDrawBankView = async (req, res) => {
 }
 
 WithDrawBank = async (req, res) => {
-    const { amount, stk, namestk, secret,bankinfo_id } = req.body
-
+    var { amount, stk, namestk, secret,bankinfo_id } = req.body
+    amount = Number(amount)
     if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
         return res.redirect("/withdraw/bank")
@@ -382,8 +382,8 @@ WithDrawMomoView = async (req, res) => {
 }
 
 WithDrawMomo = async (req, res) => {
-    const { amount, stk, namestk, secret } = req.body
-
+    var { amount, stk, namestk, secret } = req.body
+    amount = Number(amount)
     if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
         return res.redirect("/withdraw/momo")
