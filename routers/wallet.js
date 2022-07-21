@@ -28,9 +28,29 @@ router.use((req, res, next) => {
 
     }
 })
+//Get name by username
+router.post("/transfer/get-user-name", WalletController.GetUsername)
+
+//viewTradeId
+router.get("/transfer/result/:transid", WalletController.TransferResult)
 
 //history view
 router.get("/history", WalletController.GetHistoryData, WalletController.SearchHistoryMiddleware, WalletController.HistoryView)
+
+
+
+
+
+
+//transget
+router.get("/transfer", WalletController.GetDataTranhis, WalletController.TransferView)
+
+//transpost
+router.post("/transfer", limitOder, WalletController.Transfer)
+
+//transConfirm
+router.post("/transfer/confirm", WalletController.TransferConfirm)
+
 
 
 //List wallet view

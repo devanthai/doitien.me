@@ -1,0 +1,78 @@
+<div class="section-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-dark">Trang chủ</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a href="/wallet/transfer" class="text-dark">Chuyển tiền thành viên</a>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-gap">
+    <div class="container">
+
+        <%if(typeof message !="undefined" && message){%>
+            <%-message%>
+                <%}%>
+                    <section class="main">
+                        <div class="blockContent">
+                            <h4><span class="text-uppercase">Kết quả chuyển tiền</span></h4>
+
+                            <div class=" col-md-12">
+                                <table class="table">
+                                    <tbody>
+
+                                        <tr>
+                                            <td>Đơn hàng:</td>
+                                            <td>
+                                                <%-data.transId%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tài khoản nhận:</td>
+                                            <td>
+                                                <%-data.to.name%> <br>
+                                                    <%-data.user.Username%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Số tiền:</td>
+                                            <td><strong>
+                                                    <%=
+                                                        String(Math.round(data.amount)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                        đ
+                                                </strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nội dung:</td>
+                                            <td>
+                                                <%-data.comment%>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trạng thái:</td>
+                                            <td>
+                                                <span class="badge badge-success template-1-badge">Thành công</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-center" style="padding-top: 20px"><a href="/wallet/transfer"><button
+                                            class="btn btn-warning">Xem
+                                            lịch sử</button></a></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+    </div>
+</div>
