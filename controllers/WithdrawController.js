@@ -63,10 +63,10 @@ WithDrawHome = async (req, res) => {
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
-                            moneyFee = amount - feestsr[i].feeVnd
+                            moneyFee = amount + feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount - (amount * (feestsr[i].percent / 100))
+                            moneyFee = amount + (amount * (feestsr[i].percent / 100))
                         }
                         break
                     }
@@ -179,10 +179,10 @@ WithDrawGt1s = async (req, res) => {
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
-                            moneyFee = amount - feestsr[i].feeVnd
+                            moneyFee = amount + feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount - (amount * (feestsr[i].percent / 100))
+                            moneyFee = amount + (amount * (feestsr[i].percent / 100))
                         }
                         break
                     }
@@ -294,10 +294,10 @@ WithDrawBank = async (req, res) => {
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
-                            moneyFee = amount - feestsr[i].feeVnd
+                            moneyFee = amount + feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount - (amount * (feestsr[i].percent / 100))
+                            moneyFee = amount + (amount * (feestsr[i].percent / 100))
                         }
                         break
                     }
@@ -409,10 +409,10 @@ WithDrawMomo = async (req, res) => {
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
-                            moneyFee = amount - feestsr[i].feeVnd
+                            moneyFee = amount + feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount - (amount * (feestsr[i].percent / 100))
+                            moneyFee = amount +(amount * (feestsr[i].percent / 100))
                         }
                         break
                     }
@@ -524,10 +524,10 @@ WithDrawTsr = async (req, res) => {
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
-                            moneyFee = amount - feestsr[i].feeVnd
+                            moneyFee = amount + feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount - (amount * (feestsr[i].percent / 100))
+                            moneyFee = amount + (amount * (feestsr[i].percent / 100))
                         }
                         break
                     }
