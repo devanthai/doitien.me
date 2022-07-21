@@ -497,8 +497,8 @@ WithDrawTsrView = async (req, res) => {
 }
 
 WithDrawTsr = async (req, res) => {
-    const { amount, stk, namestk, secret } = req.body
-
+    var { amount, stk, namestk, secret } = req.body
+    amount = Number(amount)
     if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
         return res.redirect("/withdraw/tsr")
