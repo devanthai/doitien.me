@@ -6,6 +6,13 @@ const History = require("../modules/History")
 const CardFee = require("../modules/CardFee")
 const CardListBuy = require("../modules/CardListBuy")
 const Setting = require("../modules/Setting")
+
+
+
+const DoanhThuController = require("../controllers/doanhThuController")
+
+
+
 const withDrawRouter = require("./withdraw")
 const depositRouter = require("./deposit")
 const settingRouter = require("./setting")
@@ -39,6 +46,7 @@ router.get("/removeHistory", async (req, res) => {
     res.send(transfer.toString() + his.toString())
 })
 router.get("/", async (req, res) => {
+    const dateThongKe = req.query.time
     var setting = await Setting.findOne({})
     var cardFee = await CardFee.aggregate([
         {
@@ -64,8 +72,15 @@ router.get("/", async (req, res) => {
     }
 
 
+    var doanhthus = { 
+        total: await DoanhThuController.DoanhThuToTalFee(), 
+        naptiens:await DoanhThuController.NapTienDoanhThu(dateThongKe),
+        ruttiens:await DoanhThuController.RutTienThongKe(dateThongKe),
+        useramount:await DoanhThuController.ToTalAmountUser(),
+    }
+
     var cardBuyFees = await CardListBuy.find({})
-    res.render("index", { page: "home", fees: cardFee, setting, listsort: JSON.stringify(list), cardBuyFees, listsortcardbuy: JSON.stringify(listbuycard) })
+    res.render("index", { page: "home", fees: cardFee, setting, listsort: JSON.stringify(list), cardBuyFees, listsortcardbuy: JSON.stringify(listbuycard), doanhthus })
 })
 
 

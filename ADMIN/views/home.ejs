@@ -6,6 +6,73 @@
 
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <a href="/?time=ngay" 
+    type="button" class="btn bg-red waves-effect m-b-15 collapsed">Xem thống kê ngày</a>
+    <a href="/?time=thang" 
+    type="button" class="btn bg-red waves-effect m-b-15 collapsed">Xem thống kê tháng</a>
+   
+
+    <div class="row clearfix">
+       
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-blue hover-expand-effect">
+               
+                <div class="content">
+                    <div class="text">Tổng Doanh thu</div>
+                    <div class="number count-to ">
+
+                        <%= String(Math.round(doanhthus.total)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                            đ
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-gray hover-expand-effect">
+               
+                <div class="content">
+                    <div class="text">Tổng Tiền thành viên</div>
+                    <div class="number count-to ">
+
+                        <%= String(Math.round(doanhthus.useramount)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                            đ
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%for(let i=0;i<doanhthus.naptiens.length;i++){%>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box bg-cyan hover-expand-effect">
+                    <div class="content">
+                        <div class="text">
+                          Nạp tiền <b><%-doanhthus.naptiens[i].gate%></b>
+                        </div>
+                        <div class="number count-to">
+                            <%= String(Math.round(doanhthus.naptiens[i].totalAmount)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                đ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <%for(let i=0;i<doanhthus.ruttiens.length;i++){%>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-red hover-expand-effect">
+                        <div class="content">
+                            <div class="text">
+                              Rút tiền <b><%-doanhthus.ruttiens[i].gate%></b>
+                            </div>
+                            <div class="number count-to">
+                                <%= String(Math.round(doanhthus.ruttiens[i].totalAmount)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>
+                                    đ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+
+    </div>
+
     <div class="card">
         <div class="header">
             <h2>
@@ -74,7 +141,7 @@
                     <input id="percent" value="<%= setting.upFee %>" type="text" class="form-control"
                         placeholder="Số tiền rút tối thiểu">
                 </div>
-                <button onclick="saveUpfee()" class="btn bg-cyan waves-effect m-b-15 collapsed" type="button" >
+                <button onclick="saveUpfee()" class="btn bg-cyan waves-effect m-b-15 collapsed" type="button">
                     Lưu lại
                 </button>
             </div>
