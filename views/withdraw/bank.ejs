@@ -85,7 +85,7 @@
                                                     <option value="Vietinbank">VietinBank - Ngân hàng TMCP Công thương
                                                         Việt Nam</option>
                                                     <option value="Agribank">Agribank (hay lỗi) - Ngân hàng Nông nghiệp
-                                                        và Phát triển Nông thôn Việt Nam</option>                                          
+                                                        và Phát triển Nông thôn Việt Nam</option>
                                                     <option value="Vietcombank">Vietcombank - Ngân hàng TMCP Ngoại
                                                         thương Việt Nam</option>
                                                     <option value="MB Bank">MB Bank - Ngân hàng TMCP quân đội</option>
@@ -115,7 +115,7 @@
                                                     <option value="TPBank">TPBank - Ngân hàng TMCP Tiên Phong</option>
                                                     <option value="VIB Bank">VIB - Ngân hàng Quốc Tế VIB</option>
                                                     <option value="SAIGON Bank">SaiGonBank - Ngân hàng TMCP Sài Gòn Công
-                                                        Thương</option>                                                                                                            
+                                                        Thương</option>
                                                     <option value="PhuongDong OCB">OCB - Ngân hàng TMCP Phương Đông
                                                     </option>
                                                     <option value="OCEAN BANK">OceanBank - Ngân hàng TM TNHH Đại Dương
@@ -129,7 +129,7 @@
                                                     <option value="NAMABANK">NAMABANK-TMCP NAM A</option>
                                                     <option value="SCB">SCB- NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN SÀI GÒN
                                                     </option>
-                                                </select>                              
+                                                </select>
                                             </div>
                                         </div>
 
@@ -143,7 +143,7 @@
                                             </div>
                                         </div>
 
-                                       
+
 
 
                                         <div class="row align-items-center form-group">
@@ -156,7 +156,7 @@
                                             </div>
                                         </div>
                                         <div class="row align-items-center form-group mb-4">
-                                            
+
                                             <%if(userInfo.isActivePassLevel2){%>
                                                 <div class="col-md-9">
                                                     <label>Mã xác thực cấp 2</label>
@@ -226,29 +226,36 @@
                                     <table class="section-table">
                                         <tbody class="scroll-data">
                                             <tr>
-                                               
+
                                                 <th class="text-center">Mức rút</th>
                                                 <th class="text-center">Phí</th>
 
                                             </tr>
-                                            
-                                                <%for(let i=0;i<fees.length;i++){%>
-                                                    <tr>
 
-                                                    
-                                                   
-                                                    <td><%-String(Math.round(fees[i].from)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> đến  <%-String(Math.round(fees[i].to)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> vnđ</td>
+                                            <%for(let i=0;i<fees.length;i++){%>
+                                                <tr>
+
+
+
+                                                    <td>
+                                                        <%-String(Math.round(fees[i].from)).replace(
+                                                            /(.)(?=(\d{3})+$)/g,'$1,')%> đến
+                                                            <%-String(Math.round(fees[i].to)).replace(
+                                                                /(.)(?=(\d{3})+$)/g,'$1,')%> vnđ
+                                                    </td>
                                                     <td>
                                                         <%if(fees[i].isfeeVnd){%>
-                                                            <%-String(Math.round(fees[i].feeVnd)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> VNĐ
-                                                        <%}else{%>
-                                                            <%-String(Math.round(fees[i].percent)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>%
-                                                        <%}%>
+                                                            <%-String(Math.round(fees[i].feeVnd)).replace(
+                                                                /(.)(?=(\d{3})+$)/g,'$1,')%> VNĐ
+                                                                <%}else{%>
+                                                                    <%-String(Math.round(fees[i].percent)).replace(
+                                                                        /(.)(?=(\d{3})+$)/g,'$1,')%>%
+                                                                        <%}%>
                                                     </td>
                                                 </tr>
                                                 <%}%>
-                                                
-                                         
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -266,8 +273,9 @@
                                                 <th>Đơn hàng</th>
 
                                                 <th class="text-center">Số tiền</th>
+                                                <th class="text-center">Phí</th>
                                                 <th>Bank</th>
-                                              
+
                                                 <th>STK</th>
                                                 <th>Tên</th>
                                                 <th>Ngày tạo</th>
@@ -280,11 +288,13 @@
                                                     </td>
                                                     <td>-<%=String(data[i].amount).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
                                                             VNĐ</td>
-                                                            <td>
 
+                                                            <td>-<%=String(data[i].fee).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                                VNĐ</td>
 
-                                                                <%= data[i].bank.bankinfo %>
-                                                            </td>
+                                                    <td>
+                                                        <%= data[i].bank.bankinfo %>
+                                                    </td>
 
                                                     <td>
 
@@ -327,7 +337,8 @@
                                                 <% if (current==1) { %>
                                                     <li class="page-item disabled"><a class="page-link">Đầu</a></li>
                                                     <% } else { %>
-                                                        <li><a class="page-link" href="/withdraw/bank?page=1">Đầu</a></li>
+                                                        <li><a class="page-link" href="/withdraw/bank?page=1">Đầu</a>
+                                                        </li>
                                                         <% } %>
                                                             <% var i=(Number(current)> 2 ? Number(current) - 2 : 1) %>
                                                                 <% if (i !==1) { %>

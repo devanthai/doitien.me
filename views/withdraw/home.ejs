@@ -98,9 +98,9 @@
                                         </div>
 
 
-                                       
+
                                         <div class="row align-items-center form-group mb-4">
-                                            
+
                                             <%if(userInfo.isActivePassLevel2){%>
                                                 <div class="col-md-9">
                                                     <label>Mã xác thực cấp 2</label>
@@ -170,29 +170,36 @@
                                     <table class="section-table">
                                         <tbody class="scroll-data">
                                             <tr>
-                                               
+
                                                 <th class="text-center">Mức rút</th>
                                                 <th class="text-center">Phí</th>
 
                                             </tr>
-                                            
-                                                <%for(let i=0;i<fees.length;i++){%>
-                                                    <tr>
 
-                                                    
-                                                   
-                                                    <td><%-String(Math.round(fees[i].from)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> đến  <%-String(Math.round(fees[i].to)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> vnđ</td>
+                                            <%for(let i=0;i<fees.length;i++){%>
+                                                <tr>
+
+
+
+                                                    <td>
+                                                        <%-String(Math.round(fees[i].from)).replace(
+                                                            /(.)(?=(\d{3})+$)/g,'$1,')%> đến
+                                                            <%-String(Math.round(fees[i].to)).replace(
+                                                                /(.)(?=(\d{3})+$)/g,'$1,')%> vnđ
+                                                    </td>
                                                     <td>
                                                         <%if(fees[i].isfeeVnd){%>
-                                                            <%-String(Math.round(fees[i].feeVnd)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%> VNĐ
-                                                        <%}else{%>
-                                                            <%-String(Math.round(fees[i].percent)).replace(/(.)(?=(\d{3})+$)/g,'$1,')%>%
-                                                        <%}%>
+                                                            <%-String(Math.round(fees[i].feeVnd)).replace(
+                                                                /(.)(?=(\d{3})+$)/g,'$1,')%> VNĐ
+                                                                <%}else{%>
+                                                                    <%-String(Math.round(fees[i].percent)).replace(
+                                                                        /(.)(?=(\d{3})+$)/g,'$1,')%>%
+                                                                        <%}%>
                                                     </td>
                                                 </tr>
                                                 <%}%>
-                                                
-                                         
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,7 +217,8 @@
                                                 <th>Đơn hàng</th>
 
                                                 <th class="text-center">Số tiền</th>
-                                              
+                                                <th class="text-center">Phí</th>
+
                                                 <th>Địa chỉ</th>
                                                 <th>Tên</th>
                                                 <th>Ngày tạo</th>
@@ -223,8 +231,9 @@
                                                     </td>
                                                     <td>-<%=String(data[i].amount).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
                                                             VNĐ</td>
-                                                   
 
+                                                    <td>-<%=String(data[i].fee).replace( /(.)(?=(\d{3})+$)/g,'$1,')%>
+                                                            VNĐ</td>
                                                     <td>
 
 
@@ -266,7 +275,8 @@
                                                 <% if (current==1) { %>
                                                     <li class="page-item disabled"><a class="page-link">Đầu</a></li>
                                                     <% } else { %>
-                                                        <li><a class="page-link" href="/withdraw/home?page=1">Đầu</a></li>
+                                                        <li><a class="page-link" href="/withdraw/home?page=1">Đầu</a>
+                                                        </li>
                                                         <% } %>
                                                             <% var i=(Number(current)> 2 ? Number(current) - 2 : 1) %>
                                                                 <% if (i !==1) { %>
