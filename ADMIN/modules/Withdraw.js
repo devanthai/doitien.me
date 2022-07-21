@@ -1,9 +1,10 @@
 let mongoose = require('mongoose');
 let Schema = new mongoose.Schema({
-    moneyfirst:{ type: Number, required: true },
-    moneylast:{ type: Number },
+    moneyfirst: { type: Number, required: true },
+    moneylast: { type: Number },
     transid: { type: String, required: true },
     amount: { type: Number, required: true },
+    fee: { type: Number, default: 0 },
     bank: { type: Object, required: true },
     status: { type: Number, default: -1 },
     uid: { type: String, required: true },

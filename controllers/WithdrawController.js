@@ -32,7 +32,7 @@ WithDrawHomeView = async (req, res) => {
 }
 
 WithDrawHome = async (req, res) => {
-    var { amount, diachi, hovaten,sdt, secret } = req.body
+    var { amount, diachi, hovaten, sdt, secret } = req.body
     amount = Number(amount)
     if (!Helper.checkPhoneValid(sdt)) {
         req.flash('message', { error: 1, message: "Số điện thoại nhập không hợp lệ." })
@@ -60,13 +60,16 @@ WithDrawHome = async (req, res) => {
             if (userInfo) {
 
                 var moneyFee = 0
+                var feetoal = 0
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
                             moneyFee = amount + feestsr[i].feeVnd
+                            feetoal = feestsr[i].feeVnd
                         }
                         else {
                             moneyFee = amount + (amount * (feestsr[i].percent / 100))
+                            feetoal = amount * (feestsr[i].percent / 100)
                         }
                         break
                     }
@@ -75,7 +78,7 @@ WithDrawHome = async (req, res) => {
                     moneyFee = amount
                 }
                 if (userInfo.money < moneyFee) {
-                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee)*-1) + " vnđ đã gồm phí" })
+                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee) * -1) + " vnđ đã gồm phí" })
                     return res.redirect("/withdraw/home")
                 }
                 else {
@@ -92,7 +95,7 @@ WithDrawHome = async (req, res) => {
                                 gate: 5
                             }
 
-                            const newWithDraw = await Withdraw({ transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
+                            const newWithDraw = await Withdraw({fee: feetoal, transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
                             const history = await Historys({ transid: newWithDraw.transid, amount: -moneyFee, firtBalance: userInfo.money, lastBalance: setAmount.userinfo.money, content: "Rút tiền về " + bankInfo.bankinfo, uid: req.userInfo.uid }).save()
 
                             try {
@@ -176,13 +179,16 @@ WithDrawGt1s = async (req, res) => {
             if (userInfo) {
 
                 var moneyFee = 0
+                var feetoal = 0
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
                             moneyFee = amount + feestsr[i].feeVnd
+                            feetoal = feestsr[i].feeVnd
                         }
                         else {
                             moneyFee = amount + (amount * (feestsr[i].percent / 100))
+                            feetoal = amount * (feestsr[i].percent / 100)
                         }
                         break
                     }
@@ -191,7 +197,7 @@ WithDrawGt1s = async (req, res) => {
                     moneyFee = amount
                 }
                 if (userInfo.money < moneyFee) {
-                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee)*-1) + " vnđ đã gồm phí" })
+                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee) * -1) + " vnđ đã gồm phí" })
                     return res.redirect("/withdraw/gt1s")
                 }
                 else {
@@ -208,7 +214,7 @@ WithDrawGt1s = async (req, res) => {
                                 gate: 4
                             }
 
-                            const newWithDraw = await Withdraw({ transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
+                            const newWithDraw = await Withdraw({ fee: feetoal, transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
                             const history = await Historys({ transid: newWithDraw.transid, amount: -moneyFee, firtBalance: userInfo.money, lastBalance: setAmount.userinfo.money, content: "Rút tiền về " + bankInfo.bankinfo, uid: req.userInfo.uid }).save()
 
                             try {
@@ -267,7 +273,7 @@ WithDrawBankView = async (req, res) => {
 }
 
 WithDrawBank = async (req, res) => {
-    var { amount, stk, namestk, secret,bankinfo_id } = req.body
+    var { amount, stk, namestk, secret, bankinfo_id } = req.body
     amount = Number(amount)
     if (req.userInfo.isActivePassLevel2 && !Helper.validPassword(secret, req.user.PasswordLevel2)) {
         req.flash('message', { error: 1, message: "Sai mật khẩu cấp 2." })
@@ -291,13 +297,16 @@ WithDrawBank = async (req, res) => {
             if (userInfo) {
 
                 var moneyFee = 0
+                var feetoal = 0
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
                             moneyFee = amount + feestsr[i].feeVnd
+                            feetoal = feestsr[i].feeVnd
                         }
                         else {
                             moneyFee = amount + (amount * (feestsr[i].percent / 100))
+                            feetoal = amount * (feestsr[i].percent / 100)
                         }
                         break
                     }
@@ -306,7 +315,7 @@ WithDrawBank = async (req, res) => {
                     moneyFee = amount
                 }
                 if (userInfo.money < moneyFee) {
-                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee)*-1) + " vnđ đã gồm phí" })
+                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee) * -1) + " vnđ đã gồm phí" })
                     return res.redirect("/withdraw/bank")
                 }
                 else {
@@ -323,7 +332,7 @@ WithDrawBank = async (req, res) => {
                                 gate: 3
                             }
 
-                            const newWithDraw = await Withdraw({ transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
+                            const newWithDraw = await Withdraw({ fee: feetoal,transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
                             const history = await Historys({ transid: newWithDraw.transid, amount: -moneyFee, firtBalance: userInfo.money, lastBalance: setAmount.userinfo.money, content: "Rút tiền về " + bankInfo.bankinfo, uid: req.userInfo.uid }).save()
 
                             try {
@@ -406,13 +415,16 @@ WithDrawMomo = async (req, res) => {
             if (userInfo) {
 
                 var moneyFee = 0
+                var feetoal = 0
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
                             moneyFee = amount + feestsr[i].feeVnd
+                            feetoal = feestsr[i].feeVnd
                         }
                         else {
-                            moneyFee = amount +(amount * (feestsr[i].percent / 100))
+                            moneyFee = amount + (amount * (feestsr[i].percent / 100))
+                            feetoal = amount * (feestsr[i].percent / 100)
                         }
                         break
                     }
@@ -421,7 +433,7 @@ WithDrawMomo = async (req, res) => {
                     moneyFee = amount
                 }
                 if (userInfo.money < moneyFee) {
-                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee)*-1) + " vnđ đã gồm phí" })
+                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee) * -1) + " vnđ đã gồm phí" })
                     return res.redirect("/withdraw/momo")
                 }
                 else {
@@ -438,7 +450,7 @@ WithDrawMomo = async (req, res) => {
                                 gate: 2
                             }
 
-                            const newWithDraw = await Withdraw({ transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
+                            const newWithDraw = await Withdraw({fee: feetoal, transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
                             const history = await Historys({ transid: newWithDraw.transid, amount: -moneyFee, firtBalance: userInfo.money, lastBalance: setAmount.userinfo.money, content: "Rút tiền về " + bankInfo.bankinfo, uid: req.userInfo.uid }).save()
 
                             try {
@@ -521,13 +533,16 @@ WithDrawTsr = async (req, res) => {
             if (userInfo) {
 
                 var moneyFee = 0
+                var feetoal = 0
                 for (let i = 0; i < feestsr.length; i++) {
                     if (feestsr[i].from <= amount && amount <= feestsr[i].to) {
                         if (feestsr[i].isfeeVnd) {
                             moneyFee = amount + feestsr[i].feeVnd
+                            feetoal = feestsr[i].feeVnd
                         }
                         else {
                             moneyFee = amount + (amount * (feestsr[i].percent / 100))
+                            feetoal = amount * (feestsr[i].percent / 100)
                         }
                         break
                     }
@@ -536,7 +551,7 @@ WithDrawTsr = async (req, res) => {
                     moneyFee = amount
                 }
                 if (userInfo.money < moneyFee) {
-                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee)*-1) + " vnđ đã gồm phí" })
+                    req.flash('message', { error: 1, message: "Không có đủ tiền để rút, bạn còn thiếu " + Helper.numberWithCommas(Math.round(userInfo.money - moneyFee) * -1) + " vnđ đã gồm phí" })
                     return res.redirect("/withdraw/tsr")
                 }
                 else {
@@ -553,7 +568,7 @@ WithDrawTsr = async (req, res) => {
                                 gate: 1
                             }
 
-                            const newWithDraw = await Withdraw({ transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
+                            const newWithDraw = await Withdraw({fee: feetoal, transid: Helper.getTranidWithdraw(), amount: amount, bank: bankInfo, uid: req.user._id, username: req.user.Username, moneyfirst: req.userInfo.money }).save()
                             const history = await Historys({ transid: newWithDraw.transid, amount: -moneyFee, firtBalance: userInfo.money, lastBalance: setAmount.userinfo.money, content: "Rút tiền về " + bankInfo.bankinfo, uid: req.userInfo.uid }).save()
 
                             try {
@@ -708,13 +723,14 @@ WithDrawPost = async (req, res) => {
 }
 
 
-SelectView = (req,res)=>{
-    res.render("index", { page: "withdraw/select", user: req.user, userInfo: req.userInfo})
+SelectView = (req, res) => {
+    res.render("index", { page: "withdraw/select", user: req.user, userInfo: req.userInfo })
 }
 
-module.exports = { WithDrawView, WithDrawPost, WithDrawTsrView, WithDrawTsr,WithDrawMomo,WithDrawMomoView,WithDrawBankView,WithDrawBank ,
+module.exports = {
+    WithDrawView, WithDrawPost, WithDrawTsrView, WithDrawTsr, WithDrawMomo, WithDrawMomoView, WithDrawBankView, WithDrawBank,
 
-    WithDrawGt1s,WithDrawGt1sView
-    ,WithDrawHome,WithDrawHomeView,
+    WithDrawGt1s, WithDrawGt1sView
+    , WithDrawHome, WithDrawHomeView,
     SelectView
 }
