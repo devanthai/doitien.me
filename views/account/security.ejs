@@ -52,8 +52,8 @@
                                             thấp)</span>
                                     </td>
                                     <td>
-                                        <label class="badge badge-secondary">
-                                            Đang tắt
+                                        <label class="badge badge-<%-userInfo.isActivePassLevel2?'success':'danger'%>">
+                                            Đang <%-userInfo.isActivePassLevel2?"Bật":"Tắt"%>
                                         </label>
                                     </td>
                                     <td style="width: 15%">
