@@ -34,6 +34,11 @@ withDraw = async (req, res) => {
     const listWithdraws = await WithDraw.find({}).sort({ time: -1 })
     res.render("index", { page: "pages/withdraw/listWithdraw", listWithdraws })
 }
+autoTransferConfigView = async (req, res) => {
+    const setting = await Setting.findOne({})
+    res.render("index", { page: "pages/withdraw/configAuto", setting })
+}
+
 
 setSuccess = async (req, res) => {
     const id = req.body.id
@@ -78,4 +83,4 @@ addFee = async (req, res) => {
         res.json({ error: 1, message: "loi " + error })
     }
 }
-module.exports = { configView, saveSetting, withDraw, setSuccess, setFail, ChuaDuyetView, DaDuyetView, DaHuyView, addFee, removeFee }
+module.exports = { configView, saveSetting, withDraw, setSuccess, setFail, ChuaDuyetView, DaDuyetView, DaHuyView, addFee, removeFee,autoTransferConfigView }

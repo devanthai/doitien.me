@@ -44,6 +44,17 @@ let Schema = new mongoose.Schema({
             password: { type: String, default: "thaieahleo13" }
         }
     },
+    autoWithdraw: {
+        Momo: {
+            isRunning: { type: Boolean, default: true },
+            urlApi: { type: String, default: "https://momo.doitien.me/bankAuto?phone=sdt&pass=pass" },
+        },
+        Tsr: {
+            isRunning: { type: Boolean, default: true },
+            username: { type: String, default: "tk" },
+            password: { type: String, default: "mk" }
+        }
+    },
     thongbao: { type: String, default: "bung tè le ahihi" },
     title: { type: String, default: "Webvip" },
     sortFeeCard: { type: Array, default: ['VIETTEL', 'VINAPHONE', 'MOBIFONE', 'VNMOBI', 'ZING', 'GATE'] },

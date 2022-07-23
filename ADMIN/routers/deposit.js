@@ -11,6 +11,7 @@ router.get("/listDepositChuaduyet",depositController.listDepositViewChuaDuyet)
 router.get("/listDepositDaduyet",depositController.listDepositViewDaDuyet)
 
 router.post("/saveDepositAuto",depositController.SaveDepositAuto)
+router.post("/saveWithdrawAuto",depositController.SaveWithdrawAuto)
 
 
 module.exports = router

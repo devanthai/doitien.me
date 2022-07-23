@@ -13,6 +13,7 @@ router.get("/dahuy",withdrawController.DaHuyView)
 router.post("/setsuccess",withdrawController.setSuccess)
 router.post("/setFail",withdrawController.setFail)
 
+router.get("/configAuto",withdrawController.autoTransferConfigView)
 
 
 module.exports = router

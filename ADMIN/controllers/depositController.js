@@ -49,6 +49,15 @@ SaveDepositAuto = async (req, res) => {
         res.json({ error: 1, message: "CHỉnh sửa thất bai" })
     }
 }
+SaveWithdrawAuto = async (req, res) => {
+    const { autoWithdraw } = req.body
+    try {
+        await Setting.findOneAndUpdate({}, { autoWithdraw: autoWithdraw })
+        res.json({ error: 0, message: "CHỉnh sửa thành công" })
+    } catch {
+        res.json({ error: 1, message: "CHỉnh sửa thất bai" })
+    }
+}
 listDepositView = async (req, res) => {
     const listDeposit = await Deposit.find({}).sort({ time: -1 })
     res.render("index", { page: "pages/deposit/tatca", listDeposit })
@@ -99,4 +108,4 @@ setSuccess = async (req, res) => {
 }
 
 
-module.exports = { GateMoney, GateMoneyView, RemoveBank, SaveChanges, listDepositView, setSuccess, listDepositViewChuaDuyet, listDepositViewDaDuyet ,SaveDepositAuto}
+module.exports = { GateMoney, GateMoneyView, RemoveBank, SaveChanges, listDepositView, setSuccess, listDepositViewChuaDuyet, listDepositViewDaDuyet ,SaveDepositAuto,SaveWithdrawAuto}
