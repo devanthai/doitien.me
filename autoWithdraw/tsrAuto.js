@@ -18,30 +18,30 @@ Withdraw.updateMany({ status: 999, "bank.gate": 1 }, { status: -1 }, (data) => {
 
 start = async () => {
     setTimeout(async () => {
-        var Settingz = await Setting.findOne()
-        if(Settingz.autoWithdraw.Tsr.isRunning)
-        {
-            start()
-        }
-    }, 5000);
 
-    var rutTiens = await Withdraw.find({ status: -1,  "bank.gate": 1}).limit(2)
-    rutTiens.forEach(async (item) => {
-        console.log("\x1b[33m", "Bắt đầu ck " + item.bank.stk)
-        item.status = 999
-        item.save()
-        var chuyentien = await CkTsr(item.bank.stk, item.amount, "DoiTien.Me")
-        if (!chuyentien.error) {
-            item.status = 1
+        start()
+
+    }, 5000);
+    var Settingz = await Setting.findOne()
+    if (Settingz.autoWithdraw.Tsr.isRunning) {
+        var rutTiens = await Withdraw.find({ status: -1, "bank.gate": 1 }).limit(2)
+        rutTiens.forEach(async (item) => {
+            console.log("\x1b[33m", "Bắt đầu ck " + item.bank.stk)
+            item.status = 999
             item.save()
-            BotTelegram.sendMessage(process.env.GROUP_TELEGRAM_ID, "Chuyển tiền Thesieure thành công\nTime: " + chuyentien.time + "s" + "\nTk: " + item.bank.stk + " Số tiền: " + item.amount);
-        }
-        else {
-            BotTelegram.sendMessage(process.env.GROUP_TELEGRAM_ID, "Chuyển tiền tsr thất bại \nTk: "+item.bank.stk+"\n" + chuyentien.message);
-            item.status = -1
-            item.save()
-        }
-    })
+            var chuyentien = await CkTsr(item.bank.stk, item.amount, "DoiTien.Me")
+            if (!chuyentien.error) {
+                item.status = 1
+                item.save()
+                BotTelegram.sendMessage(process.env.GROUP_TELEGRAM_ID, "Chuyển tiền Thesieure thành công\nTime: " + chuyentien.time + "s" + "\nTk: " + item.bank.stk + " Số tiền: " + item.amount);
+            }
+            else {
+                BotTelegram.sendMessage(process.env.GROUP_TELEGRAM_ID, "Chuyển tiền tsr thất bại \nTk: " + item.bank.stk + "\n" + chuyentien.message);
+                item.status = -1
+                item.save()
+            }
+        })
+    }
 }
 start()
 
