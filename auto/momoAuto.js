@@ -13,12 +13,12 @@ setInterval(async () => {
     const setting = await Setting.findOne({})
     request.get(setting.autoDeposit.Momo.urlApi + '?sdt=' + setting.autoDeposit.Momo.phoneNumber, function (error, response, body) {
         try {
-            var json = JSON.parse(body)
+            let json = JSON.parse(body)
             if (json) {
                 json.forEach(async (element) => {
                     if (element.io == 1) {
                         const description = element.noidung.toLowerCase()
-                        var creditAmount = element.sotien
+                        let creditAmount = element.sotien
                         creditAmount = Number(creditAmount)
                         console.log(description,description.split("naptien").length)
 
@@ -26,7 +26,7 @@ setInterval(async () => {
                             console.log(description,creditAmount)
 
                             const deposits = await Deposit.find({ $text: { $search: description }, status: 0 })
-                            var donpick = null
+                            let donpick = null
                             deposits.forEach(elementz => {
                                 if (description.search(elementz.content.toLowerCase()) != -1) {
                                     donpick = elementz
@@ -37,13 +37,13 @@ setInterval(async () => {
                             if (donpick != null && donpick.gate.toLowerCase().includes("mm")) {
                                 if (creditAmount == donpick.amount) {
                                     await Deposit.findByIdAndUpdate(donpick._id, { status: 1 })
-                                    var userI = await UserInfo.findOneAndUpdate({ uid: donpick.uid }, { $inc: { money: donpick.amount } })
+                                    let userI = await UserInfo.findOneAndUpdate({ uid: donpick.uid }, { $inc: { money: donpick.amount } })
                                     const history = await History({ transid: donpick.transid, amount: creditAmount, firtBalance: userI.money, lastBalance: userI.money + creditAmount, content: "Nạp tiền từ Momo", uid: donpick.uid }).save()
                                     if (history) {
                                         const keyHistory = "history"
                                         const keyRedisHistory = keyHistory + donpick.uid
                                         const checkHistoryredis = await redisClient.get(keyRedisHistory)
-                                        var arrayHistory = JSON.parse(checkHistoryredis)
+                                        let arrayHistory = JSON.parse(checkHistoryredis)
                                         if (arrayHistory == null) {
                                             arrayHistory = []
                                         }

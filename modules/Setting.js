@@ -53,7 +53,14 @@ let Schema = new mongoose.Schema({
             isRunning: { type: Boolean, default: true },
             username: { type: String, default: "tk" },
             password: { type: String, default: "mk" }
-        }
+        },
+        Acb: {
+            linkapi: { type: String, default: "http://139.180.133.253/" },
+            username: { type: String, default: "tk" },
+            password: { type: String, default: "mk" },
+            accountNumber: { type: String, default: "acc" },
+            isRunning: { type: Boolean, default: true }
+        },
     },
     thongbao: { type: String, default: "bung tè le ahihi" },
     title: { type: String, default: "Webvip" },

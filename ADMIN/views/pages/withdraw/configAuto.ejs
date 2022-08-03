@@ -57,7 +57,46 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
 
+                                <h2>ACB auto</h2>
+
+                                <h2 class="card-inside-title">url Api</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="Acblinkapi" value="<%-setting.autoWithdraw.Acb.linkapi%>" type="text"
+                                            class="form-control" placeholder="linkapi">
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">accountNumber</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="AcbaccountNumber" value="<%-setting.autoWithdraw.Acb.accountNumber%>"
+                                            type="text" class="form-control" placeholder="accountNumber">
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">Username</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="Acbusername" value="<%-setting.autoWithdraw.Acb.username%>"
+                                            type="text" class="form-control" placeholder="usernameTsr">
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">Password</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="Acbpassword" value="<%-setting.autoWithdraw.Acb.password%>"
+                                            type="text" class="form-control" placeholder="passwordTsr">
+                                    </div>
+                                </div>
+                                <h2 class="card-inside-title">isRunning</h2>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input id="AcbisRunning" value="<%-setting.autoWithdraw.Acb.isRunning%>"
+                                            type="text" class="form-control" placeholder="isRunningTsr">
+                                    </div>
+                                </div>
+                            </div>
 
 
                             <div class="col-sm-12">
@@ -81,7 +120,15 @@
         const usernameTsr = $("#usernameTsr").val()
         const passwordTsr = $("#passwordTsr").val()
 
-        var autoWithdraw= {
+
+        const Acblinkapi = $("#Acblinkapi").val()
+        const AcbaccountNumber = $("#AcbaccountNumber").val()
+        const Acbusername = $("#Acbusername").val()
+        const Acbpassword = $("#Acbpassword").val()
+        const AcbisRunning = $("#AcbisRunning").val()
+
+
+        var autoWithdraw = {
             Momo: {
                 isRunning: isRunningMomo,
                 urlApi: urlApiMomo,
@@ -90,7 +137,14 @@
                 isRunning: isRunningTsr,
                 username: usernameTsr,
                 password: passwordTsr
-            }
+            },
+            Acb: {
+                linkapi: Acblinkapi,
+                username: Acbusername,
+                password: Acbpassword,
+                accountNumber: AcbaccountNumber,
+                isRunning: AcbisRunning
+            },
         }
         $.ajax({
             url: "/deposit/saveWithdrawAuto",
@@ -103,4 +157,5 @@
             }
         });
     }
+
 </script>
