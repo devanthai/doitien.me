@@ -17,7 +17,7 @@ Withdraw.updateMany({ status: 999, "bank.gate": 3 }, { status: -1 }, (data) => {
 start = async () => {
     setTimeout(async () => {
         start()
-    }, 5000);
+    }, 20000);
     const setting = await Setting.findOne()
     if (setting.autoWithdraw.Acb.isRunning) {
         let rutTiens = await Withdraw.findOne({ status: -1, "bank.gate": 3 })
